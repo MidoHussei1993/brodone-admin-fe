@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+    - refs/heads/main
+resources:
+  repositories:
+  - repository: Helm
+    type: git
+    name: Taba/Helm
+    ref: master
+name: $(date:yyyyMMdd)$(rev:.r)
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-20.04
+  steps:
+  - checkout: self
+  - checkout: Helm
+    clean: true
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    condition: succeededOrFailed()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+  - task: Docker@2
+    displayName: buildAndPush
+    inputs:
+      containerRegistry: 'gcp-docker-registry'
+      repository: taba-339219/$(Build.Repository.Name)
+  - task: HelmInstaller@0
+    displayName: 'Install Helm 2.14.1'
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: ls -la
+  - task: HelmDeploy@0
+    displayName: 'helm upgrade'
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceConnection: 'gcp kube'
+      namespace: default
+      command: upgrade
+      chartType: FilePath
+      chartPath: '$(System.DefaultWorkingDirectory)/Helm'
+      releaseName: $(Build.Repository.Name)
+      valueFile: '$(System.DefaultWorkingDirectory)/Helm/ui.yaml'
+      overrideValues: "image.tag=$(Build.BuildId),image.servicename=$(Build.Repository.Name),ingress.enabled=true,probe.path=/,probe.port=80,service.port=80,replicaCount=2"
+      waitForExecution: false

@@ -182,17 +182,17 @@ export class DashboadDefaultComponent implements OnInit {
                 }
             ],
             series: [{
-                    name: 'Sales by Country',
+                    name: 'مبيعات المطابع',
                     type: 'pie',
                     radius: '75%',
                     center: ['50%', '50%'],
                     data: [
-                        { value: 535, name: 'USA' },
-                        { value: 310, name: 'Brazil' },
-                        { value: 234, name: 'France' },
-                        { value: 155, name: 'Germany' },
-                        { value: 130, name: 'UK' },
-                        { value: 348, name: 'India' }
+                        { value: 535, name: 'مطبعه الفرسان' },
+                        { value: 310, name: 'مطبعه الاحسان' },
+                        { value: 234, name: 'مطبعه الصحراء' },
+                        { value: 155, name: 'مطبعه الاشقاء' },
+                        { value: 130, name: 'مطبعه ارض الاحلام' },
+                        { value: 348, name: 'مطبعه الرياض' }
                     ],
                     itemStyle: {
                         emphasis: {

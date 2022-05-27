@@ -44,6 +44,6 @@ jobs:
       chartType: FilePath
       chartPath: '$(System.DefaultWorkingDirectory)/Helm'
       releaseName: $(Build.Repository.Name)
-      valueFile: '$(System.DefaultWorkingDirectory)/Helm/ui.yaml'
+      valueFile: '$(System.DefaultWorkingDirectory)/Helm/dashboard.yaml'
       overrideValues: "image.tag=$(Build.BuildId),image.servicename=$(Build.Repository.Name),ingress.enabled=true,probe.path=/,probe.port=80,service.port=80,replicaCount=2"
       waitForExecution: false

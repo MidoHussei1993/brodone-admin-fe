@@ -9,6 +9,7 @@ WORKDIR /usr/local/app
 COPY ./ /usr/local/app/
 
 # Install all the dependencies
+RUN npm cache clean --force
 RUN npm install
 
 # Generate the build of the application

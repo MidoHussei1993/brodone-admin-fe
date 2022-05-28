@@ -167,7 +167,7 @@ export class NavigationService {
         // },
         {
             name: 'المطابع',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            description: 'ادار حسابات المطابع',
             type: 'dropDown',
             icon: 'i-Computer-2',
             sub: [
@@ -176,7 +176,7 @@ export class NavigationService {
         },
         {
             name: 'التصنيفات',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            description: 'ادارة الاصناف الرئيسية والفئات.',
             type: 'dropDown',
             icon: 'i-Posterous',
             sub: [
@@ -185,7 +185,7 @@ export class NavigationService {
         },
         {
             name: 'المنتجات',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            description: 'ادارة المنتجات',
             type: 'dropDown',
             icon: 'i-Car-Items',
             sub: [
@@ -194,7 +194,7 @@ export class NavigationService {
         },
         {
             name: 'الرسائل',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            description: 'رسائل العملاء',
             type: 'dropDown',
             icon: 'i-Mail-2',
             sub: [
@@ -203,7 +203,7 @@ export class NavigationService {
         },
         {
             name: 'الطلبات',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            description: 'ادارة  وتوزيع الطلبات',
             type: 'dropDown',
             icon: 'i-Financial',
             sub: [

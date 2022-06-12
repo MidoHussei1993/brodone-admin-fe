@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   checkAuth() {
-    // this.authenticated = this.store.getItem("demo_login_status");
+    this.authenticated = this.store.getItem("demo_login_status");
   }
 
   getuser() {
@@ -31,6 +31,7 @@ export class AuthService {
   signout() {
     this.authenticated = false;
     this.store.setItem("demo_login_status", false);
+    localStorage.clear();
     this.router.navigateByUrl("/sessions/signin");
   }
 }

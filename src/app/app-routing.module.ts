@@ -11,6 +11,18 @@ const adminRoutes: Routes = [
       path: 'dashboard',
       loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
+    {
+      path: 'order',
+      loadChildren: () => import('./views/orders/orders.module').then(m => m.OrdersModule)
+    },
+    {
+      path: 'message',
+      loadChildren: () => import('./views/message/message.module').then(m => m.MessageModule)
+    },
+    {
+      path: 'category',
+      loadChildren: () => import('./views/category/category.module').then(m => m.CategoryModule)
+    },
     // {
     //   path: 'uikits',
     //   loadChildren: () => import('./views/ui-kits/ui-kits.module').then(m => m.UiKitsModule)
@@ -59,16 +71,16 @@ const routes: Routes = [
     redirectTo: 'dashboard/v1',
     pathMatch: 'full'
   },
-  // {
-  //   path: '',
-  //   component: AuthLayoutComponent,
-  //   children: [
-  //     {
-  //       path: 'sessions',
-  //       loadChildren: () => import('./views/sessions/sessions.module').then(m => m.SessionsModule)
-  //     }
-  //   ]
-  // },
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: 'sessions',
+        loadChildren: () => import('./views/sessions/sessions.module').then(m => m.SessionsModule)
+      }
+    ]
+  },
   {
     path: '',
     component: BlankLayoutComponent,
@@ -82,7 +94,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminLayoutSidebarCompactComponent,
-    canActivate: [AuthGaurd],
+    // canActivate: [AuthGaurd],
     children: adminRoutes
   },
   {

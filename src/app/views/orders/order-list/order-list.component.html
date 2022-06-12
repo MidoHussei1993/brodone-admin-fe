@@ -1,0 +1,96 @@
+<div class=" mb-4">
+  <div class="breadcrumb">
+    <h1 class="">{{ "orders" | translate }}</h1>
+    <ul>
+      <li>
+        <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+      </li>
+      <li>{{ "orders" | translate }}</li>
+    </ul>
+  </div>
+
+  <!-- <a class="btn btn-sm btn-primary mb-3" [routerLink]="'/faqs/create'">
+        <i class="fas fa-plus"></i>
+        {{ "action.create" | translate }}
+      </a> -->
+  <div class="card bg-dark my-3 shadow">
+    <div class="card-body ">
+      <app-filter [filter]="filter"></app-filter>
+    </div>
+  </div>
+  <app-table
+    [list]="orderList"
+    [titles]="titles"
+    [properties]="properties"
+    [pagination]="pagination"
+    (activetedPageSize)="setPageSize($event)"
+    (activetedPageNumber)="setPageNumber($event)"
+    [showSearch]="true"
+    [showEdit]="false"
+    [showView]="false"
+    [showDelete]="false"
+    (search)="searchValue()"
+    (resetFilter)="resetfilter()"
+    [addActions]="true"
+    [actionList]="[
+      {
+        title: 'assign',
+        icon: 'i-Checked-User',
+        type: 'assign'
+      },
+      {
+        title: 'revoke',
+        icon: 'i-Remove-User',
+        type: 'revoke'
+      },
+      { title: 'withdraw', icon: 'i-Close-Window', type: 'withdraw' }
+    ]"
+    (aciton)="navigateTO($event)"
+  ></app-table>
+</div>
+
+<ng-template #modalConfirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text-center mx-auto" id="modal-title">
+      {{ currentAction | translate }}
+    </h4>
+    <!-- <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12 col-sm-12 ">
+      <label for="" class="control-label mx-auto">
+        {{ "printHouse" | translate }}
+      </label>
+      <select
+        class="form-control text-center"
+        (input)="setSelectedCompany($event.target['value'])"
+      >
+        <option [value]="item.id" *ngFor="let item of printHouseList">
+          {{ item.compnay }}
+        </option>
+      </select>
+
+      <!--end::Page Number-->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      ngbAutofocus
+      class="btn btn-success btn-rounded"
+      (click)="applyAction()"
+    >
+    {{ "save" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-rounded mx-2"
+      (click)="modal.dismiss('cancel')"
+    >
+    {{ "cancel" | translate }}
+    </button>
+  </div>
+</ng-template>
+<!-- (click)="confirm(modalConfirm) -->

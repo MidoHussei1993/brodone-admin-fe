@@ -8,8 +8,26 @@ import { SearchModule } from './components/search/search.module';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { SharedDirectivesModule } from './directives/shared-directives.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableComponent } from './components/table/table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DemoNumberPipe } from './pipes';
+import { FilterComponent } from './components/filter/filter.component';
+
+const Component = [
+  TableComponent,
+  FilterComponent
+]
+const Pipes = [
+  DemoNumberPipe
+]
 
 @NgModule({
+  declarations: [
+    ...Component,
+    ...Pipes,
+  ],
   imports: [
     CommonModule,
     PerfectScrollbarModule,
@@ -19,7 +37,21 @@ import { SharedPipesModule } from './pipes/shared-pipes.module';
     SharedComponentsModule,
     SharedDirectivesModule,
     SharedPipesModule,
-    RouterModule
+    RouterModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  exports: [
+    RouterModule,
+    TranslateModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    ...Component,
+    ...Pipes,
   ]
 })
 export class SharedModule { }

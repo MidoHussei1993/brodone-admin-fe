@@ -1,0 +1,233 @@
+<form [formGroup]="form">
+  <div class="row mb-1 mt-2 d-flex justify-content-between">
+    <div class="col-md-3 col-sm-12">
+      <div
+        class="alert alert-primary mt-4 text-center"
+        role="alert"
+        *ngIf="pagination.NumberOfItems"
+      >
+        <strong>
+          {{ "total" | translate }} : {{ pagination.NumberOfItems }}
+        </strong>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 d-flex justify-content-end my-4">
+      <a
+        type="button"
+        class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+        *ngIf="create"
+        [routerLink]="create"
+      >
+        <i class="fas fa-download"></i>
+        {{ "create" | translate }}
+      </a>
+      <button
+        type="button"
+        class="btn btn-rounded btn-primary px-4 mx-4 d-inline-block"
+        (click)="searchValue()"
+        *ngIf="showSearch"
+      >
+        <i class="mx-2 text-18 i-File-Search font-weight-bold"></i>
+        {{ "search" | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-rounded btn-danger px-4 mx-4 d-inline-block"
+        (click)="reset()"
+        *ngIf="showSearch"
+      >
+        <i class="text-18 i-Arrow-Circle font-weight-bold"></i>
+        {{ "reset" | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="table-responsive">
+    <table
+      class="table table-hover table-rounded table-striped border gy-7 gs-7"
+    >
+      <thead>
+        <tr class="">
+          <th class="text-cetner" *ngIf="pagination.NumberOfItems">#</th>
+          <th *ngFor="let title of titles" class="text-center">
+            {{ title | translate }}
+          </th>
+          <th *ngIf="showAnotherCheck" class="text-center">
+            {{ AnotherCheckTitelName | translate }}
+          </th>
+          <th *ngIf="showActivation" class="text-center">
+            {{ "field.activation" | translate }}
+          </th>
+          <th *ngIf="showDelete || showEdit || showView" class="text-center">
+            {{ "action.actions" | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of list; let i = index"
+          class="slideDown"
+          [attr.data-change-color]="item.changeColour ? true : false"
+        >
+          <td
+            class="text-center font-weight-bolder"
+            *ngIf="pagination.NumberOfItems"
+          >
+            <h5>
+              <strong>
+                {{
+                  i +
+                    1 +
+                    (pagination.NumberOfPages - 1) * pagination.TotalPages +
+                    1
+                }}
+              </strong>
+            </h5>
+          </td>
+          <td *ngFor="let prop of properties" class="text-center align-middle">
+            <span
+              *ngIf="
+                prop == 'createdDate' ||
+                prop == 'bookingDate' ||
+                prop == 'startAt' ||
+                prop == 'endAt'
+              "
+            >
+              {{ item[prop] | date: "MMM d, y - h:mm a" }}
+            </span>
+            <span
+              *ngIf="
+                prop != 'createdDate' &&
+                prop != 'bookingDate' &&
+                prop != 'startAt' &&
+                prop != 'endAt' &&
+                prop != 'imageUrl' &&
+                prop != 'basicImageForDesignUrl'
+              "
+            >
+              {{ item[prop] }}
+            </span>
+            <img
+              [src]="item[prop]"
+              style="border-radius: 50%"
+              width="50"
+              height="50"
+              *ngIf="prop == 'imageUrl' || prop == 'basicImageForDesignUrl'"
+            />
+          </td>
+          <td class="text-center" *ngIf="showAnotherCheck">
+            <label
+              class="form-check form-check-sm form-check-custom form-check-solid"
+            >
+              <input
+                class="form-check-input mx-auto"
+                type="checkbox"
+                :value="true"
+                [(ngModel)]="item[AnotherCheckPropName]"
+                (ngModelChange)="changeAnotherCheckCol(i)"
+              />
+            </label>
+          </td>
+          <td class="text-center" *ngIf="showActivation">
+            <label
+              class="form-check form-check-sm form-check-custom form-check-solid"
+            >
+              <input
+                class="form-check-input mx-auto"
+                type="checkbox"
+                :value="true"
+                [(ngModel)]="item.isActive"
+                (ngModelChange)="changeActivationCol(i)"
+              />
+            </label>
+          </td>
+          <td
+            class="text-center d-flex justify-content-between align-middle"
+            *ngIf="showDelete || showEdit || showView || addActions"
+          >
+            <i
+              title="{{ 'View' | translate }}"
+              class="text-20 font-weight-bold i-Eye"
+              *ngIf="showView"
+              (click)="View(item)"
+            ></i>
+            <i
+              title="{{ 'Edit' | translate }}"
+              class="text-20 font-weight-bold i-Pen-4"
+              *ngIf="showEdit"
+              (click)="Edit(item)"
+            ></i>
+            <i
+              title="{{ 'Delete' | translate }}"
+              class="text-20 font-weight-bold i-Delete-File"
+              *ngIf="showDelete"
+              (click)="Delete(item)"
+            ></i>
+            <i
+              title="{{ action.title | translate }}"
+              [class]="action.icon"
+              class="text-20 font-weight-bold customAction"
+              *ngFor="let action of actionList"
+              (click)="EmitAaction(item, action.type)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row" *ngIf="showPagination">
+  <div class="col-md-1 col-sm-12 text-right">
+    <select
+      [disabled]="busyLoading"
+      class="form-control text-center"
+      (input)="pageSizeChanged($event.target['value'])"
+      [(ngModel)]="pageSize"
+    >
+      <option [ngValue]="rowsNum" *ngFor="let rowsNum of rowsNumber">
+        {{ rowsNum }}
+      </option>
+    </select>
+
+    <!--end::Page Number-->
+  </div>
+  <div class="col-10">
+    <ul class="pagination">
+      <li
+        class="page-item previous disabled"
+        (click)="sendPageNumber(active - 1)"
+        *ngIf="pagination.NumberOfPages > 1 && active > 1"
+      >
+        <span class="page-link text-dark font-weight-bolder">
+          {{ "global.previous" | translate }}
+        </span>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{ active: item + 1 == active }"
+        *ngFor="
+          let item of pagination.NumberOfPages | demoNumber;
+          let i = index
+        "
+        (click)="sendPageNumber(item + 1)"
+      >
+        <a class="page-link">
+          {{ item + 1 }}
+        </a>
+      </li>
+
+      <li
+        class="page-item next"
+        (click)="sendPageNumber(active + 1)"
+        *ngIf="
+          pagination.NumberOfPages > 1 && active < pagination.NumberOfPages
+        "
+      >
+        <a class="page-link text-dark font-weight-bolder">
+          {{ "global.next" | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -180,7 +180,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Posterous',
             sub: [
-                { icon: 'i-Error-404-Window', name: 'Not found', state: '/others/404', type: 'link' }
+                { icon: 'i-Clock-3', name: 'القائمة', state: '/category', type: 'link' },
             ]
         },
         {
@@ -198,7 +198,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Mail-2',
             sub: [
-                { icon: 'i-Error-404-Window', name: 'Not found', state: '/others/404', type: 'link' }
+                { icon: 'i-Clock-3', name: 'القائمة', state: '/message', type: 'link' },
             ]
         },
         {
@@ -207,7 +207,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Financial',
             sub: [
-                { icon: 'i-Error-404-Window', name: 'Not found', state: '/others/404', type: 'link' }
+                { icon: 'i-Clock-3', name: 'القائمة', state: '/order', type: 'link' },
             ]
         },
         {

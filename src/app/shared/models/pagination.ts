@@ -3,6 +3,6 @@ export class Pagination {
   size: number;
   NumberOfElements: number;
   NumberOfItems: number;
-  TotalPages: number;
+  totalPages: number;
   NumberOfPages: number;
 }

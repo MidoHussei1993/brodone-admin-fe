@@ -2,49 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Pagination } from 'src/app/shared/models';
-import { Order } from '../../orders/models';
-import { CategoryFilter } from '../models';
-import { CategoryService } from '../services/category.service';
+import { ProductFilter } from '../models';
+import { ProductService } from '../services/product.service';
 
 @Component({
-  selector: 'app-gategory-list',
-  templateUrl: './gategory-list.component.html',
-  styleUrls: ['./gategory-list.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class GategoryListComponent implements OnInit {
-  categoryList: Order[] = [];
+export class ProductListComponent implements OnInit {
+  productList: any[] = [];
   titles: string[] = [
     "id",
     "name",
-    "description",
-    "imageUrl",
-    "basicImageForDesignUrl",
+    "productImage",
   ];
   properties: string[] = [
     "id",
     "name",
-    "description",
-    "imageUrl",
-    "basicImageForDesignUrl",
+    "mainImageUrl",
   ];
-  filter: CategoryFilter = new CategoryFilter();
+  filter: ProductFilter = new ProductFilter();
   pagination: Pagination = new Pagination();
 
   constructor(
     private router: Router,
-    private categoryService: CategoryService,
+    private productService: ProductService,
     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.filter.page = 0;
+    this.filter.page = 1;
     this.filter.size = 10;
   
-    this.getCategoryList();
+    this.getproductList();
   }
 
   searchValue(): void {
-    this.getCategoryList();
+    this.getproductList();
   }
 
   resetfilter() {
@@ -52,17 +47,17 @@ export class GategoryListComponent implements OnInit {
       page: this.filter.page,
       size: this.filter.size,
     };
-    this.filter = new CategoryFilter();
+    this.filter = new ProductFilter();
     this.filter.page = pagePagination.page;
     this.filter.size = pagePagination.size;
-    this.getCategoryList();
+    this.getproductList();
   }
 
-  getCategoryList() {
+  getproductList() {
     this.spinner.show();
-    this.categoryService.getAll(this.filter).subscribe(
+    this.productService.getAll(this.filter).subscribe(
       (res: any) => {
-        this.categoryList = res.data.content;
+        this.productList = res.data.content;
         delete res.data.content;
         this.pagination = { ...this.filter, ...res.data };
         this.spinner.hide();
@@ -76,26 +71,26 @@ export class GategoryListComponent implements OnInit {
   setPageSize(pageSize) {
     if (pageSize == this.filter.size) return;
     this.filter.size = pageSize;
-    this.getCategoryList();
+    this.getproductList();
   }
 
   setPageNumber(pageNumber: number) {
     if (pageNumber == this.filter.page) return;
     this.filter.page = pageNumber;
-    this.getCategoryList();
+    this.getproductList();
   }
   navigateToEdit(event) {
-    this.router.navigateByUrl(`/category/edit/${event.id}`);
+    this.router.navigateByUrl(`/product/edit/${event.id}`);
   }
   navigateToView(event) {
-    this.router.navigateByUrl(`/category/view/${event.id}`);
+    this.router.navigateByUrl(`/product/view/${event.id}`);
   }
 
-  deleteCategory(item){
+  deleteproduct(item){
     this.spinner.show();
-    this.categoryService.delete(item.id).subscribe(
+    this.productService.delete(item.id).subscribe(
       (res: any) => {
-        this.getCategoryList();
+        this.getproductList();
         this.spinner.hide();
       },
       (err) => {

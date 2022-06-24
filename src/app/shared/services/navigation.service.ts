@@ -189,7 +189,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Car-Items',
             sub: [
-                { icon: 'i-Error-404-Window', name: 'Not found', state: '/others/404', type: 'link' }
+                { icon: 'i-Clock-3', name: 'القائمة', state: '/product', type: 'link' },
             ]
         },
         {

@@ -54,5 +54,18 @@
     "avatar": "الصورة الرمزية",
     "avatar_name": "اسم الصورة الرمزية",
     "email": "البريد الالكتروني",
-    "Email": "البريد الالكتروني"
+    "productImage": "صورة المنتج",
+    "Products": "المنتجات",
+    "size": "الحجم",
+    "color": "اللون",
+    "imageOverlayEnabled": "امكانية تركيب لوجو",
+    "imageOverlayCost": "سعر تركيب اللوجو",
+    "Email": "البريد الالكتروني",
+    "category": "التصنيف",
+    "fromQuantity": "الكمية من",
+    "toQuantity": "الكمية الي",
+    "price": "السعر",
+    "proudctImage": "صورة المنتج",
+    "orderNo": "رقم ترتيب الصورة",
+    "pricingList": "قائمة الاسعار"
 }

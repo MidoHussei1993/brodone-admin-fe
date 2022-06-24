@@ -61,5 +61,52 @@
         </div>
       </div>
     </form>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" (click)="uploadImage.click()">
+          <div class="card-header">
+            <h5>Image</h5>
+          </div>
+          <div class="card-body text-center">
+            <img
+              [src]="categoryImage"
+              class="img-fluid"
+              width="300"
+              height="300"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card" (click)="uploadCanvas.click()">
+          <div class="card-header">
+            <h5>canvas</h5>
+          </div>
+          <div class="card-body text-center">
+            <img
+              [src]="canvasImage"
+              class="img-fluid"
+              width="300"
+              height="300"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<input
+  type="file"
+  hidden="true"
+  #uploadImage
+  (change)="uploadCategoryImage($event)"
+/>
+<input
+  type="file"
+  hidden="true"
+  #uploadCanvas
+  (change)="uploadCategoryCanvas($event)"
+/>

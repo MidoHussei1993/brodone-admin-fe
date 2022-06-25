@@ -7,6 +7,7 @@ export const FasterAPI = BaseURL + "/api";
 class services {
   public static mkt = `${BaseURL}mkt/api/v1/`;
   public static usr = `${BaseURL}usr/api/v1/`;
+  public static usrApi = `${BaseURL}usr/`;
   public static uaa = `${BaseURL}uaa/`;
   public static pay = `${BaseURL}pay/v1/api/`;
 }
@@ -30,6 +31,12 @@ export class END_POINTS {
   };
   public static printhouse = {
     printhouse: services.mkt + "admin/dashboard/printhouse",
+    get: services.usrApi + "v1/admin/printing/all/pages",
+    add: services.usrApi + "v1/admin/printing",
+    edit: services.usrApi + "v1/admin/printing",
+    getById: (categoryId: number): string =>
+      services.usrApi + "v1/admin/printing/" + categoryId,
+    cityDropdown: services.mkt + "city/region",
   };
 
   public static message = {

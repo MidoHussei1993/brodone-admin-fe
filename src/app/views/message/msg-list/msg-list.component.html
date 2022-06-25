@@ -1,31 +1,80 @@
-<div class=" mb-4">
-    <div class="breadcrumb">
-      <h1 class="">{{ "orders" | translate }}</h1>
-      <ul>
-        <li>
-          <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
-        </li>
-        <li>{{ "orders" | translate }}</li>
-      </ul>
-    </div>
-  
-    <!-- <a class="btn btn-sm btn-primary mb-3" [routerLink]="'/faqs/create'">
-          <i class="fas fa-plus"></i>
-          {{ "action.create" | translate }}
-        </a> -->
-  
-    <app-table
-      [list]="messageList"
-      [titles]="titles"
-      [properties]="properties"
-      [showPagination]="false"
-      [showEdit]="false"
-      [showView]="false"
-      [showDelete]="false"
-     
-    ></app-table>
+<div class="mb-4">
+  <div class="breadcrumb">
+    <h1 class="">{{ "message" | translate }}</h1>
+    <ul>
+      <li>
+        <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+      </li>
+      <li>{{ "message" | translate }}</li>
+    </ul>
   </div>
-  
 
-  <!-- (click)="confirm(modalConfirm) -->
-  
+  <div class="card bg-dark bg-">
+    <div class="card-body">
+      <div *ngFor="let item of messageList; let i = index">
+        <div class="card my-2">
+          <div class="card-body py-2">
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <h5 class="font-weight-bolder">
+                  {{ item.sender }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-sm-10">
+                <p class="mb-0">
+                  {{ item.body }}
+                </p>
+              </div>
+              <div class="col-md-2 col-sm-2">
+                <button
+                  type="button"
+                  class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                >
+                  Reply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 col-sm-12 mx-auto">
+            <div
+              class="card my-2"
+              *ngFor="let comment of item.replyMessage; let i = index"
+            >
+              <div class="card-body py-2">
+                <div class="row">
+                  <div class="col-md-4 col-sm-12">
+                    <h5 class="font-weight-bolder">
+                      {{ comment.sender }}
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-10 col-sm-10">
+                    <p class="mb-0">
+                      {{ comment.body }}
+                    </p>
+                  </div>
+                  <div class="col-md-2 col-sm-2">
+                    <button
+                      type="button"
+                      class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                    >
+                      Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- (click)="confirm(modalConfirm) -->

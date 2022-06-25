@@ -66,5 +66,18 @@
   "price": "Price",
   "proudctImage": "؛roudct Image",
   "orderNo": "Image order number",
-  "category": "Category"
+  "category": "Category",
+  "username": "user name",
+  "companyName": " company Name",
+  "managerName": "manager Name",
+  "phoneNo": "phone",
+  "tradName": "trad Name",
+  "address": "address",
+  "cityName": "city",
+  "firstName": "first Name",
+  "lastName": "last Name",
+  "password": "password",
+  "cityId": "city",
+  "message": "Message",
+  "printer": "printer"
 }

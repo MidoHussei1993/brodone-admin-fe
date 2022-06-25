@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Pagination } from 'src/app/shared/models';
-import { PrintHouseService } from 'src/app/shared/services/print-house.service';
-import { OrderFilter } from '../../orders/models';
-import { Message, MessageFilter } from '../models';
-import { MsgService } from '../services/msg.service';
+import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Pagination } from "src/app/shared/models";
+import { PrintHouseService } from "src/app/shared/services/print-house.service";
+import { OrderFilter } from "../../orders/models";
+import { Message, MessageFilter } from "../models";
+import { MsgService } from "../services/msg.service";
 
 @Component({
-  selector: 'app-msg-list',
-  templateUrl: './msg-list.component.html',
-  styleUrls: ['./msg-list.component.scss']
+  selector: "app-msg-list",
+  templateUrl: "./msg-list.component.html",
+  styleUrls: ["./msg-list.component.scss"],
 })
 export class MsgListComponent implements OnInit {
   messageList: Message[] = [];
@@ -35,10 +35,10 @@ export class MsgListComponent implements OnInit {
   filter: MessageFilter = new MessageFilter();
   pagination: Pagination = new Pagination();
 
-  currentAction: string = '';
-  printHouseList:{compnay:string,id:number}[]= [];
-  selectedCompanyId:number = null;
-  currentOrderId:number = null;
+  currentAction: string = "";
+  printHouseList: { compnay: string; id: number }[] = [];
+  selectedCompanyId: number = null;
+  currentReply: number = null;
 
   constructor(
     private msgService: MsgService,
@@ -49,16 +49,14 @@ export class MsgListComponent implements OnInit {
 
   ngOnInit(): void {
     this.filter.page = 1;
-    this.filter.size = 10;
+    this.filter.size = 5;
+    this.filter.id = 1;
     this.getmessageList();
-
   }
-
- 
 
   getmessageList() {
     this.spinner.show();
-    this.msgService.getAllReceived(this.filter).subscribe(
+    this.msgService.getAll(this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
         this.messageList = res.content;
@@ -80,7 +78,4 @@ export class MsgListComponent implements OnInit {
     this.filter.page = pageNumber;
     this.getmessageList();
   }
-  
-
-
 }

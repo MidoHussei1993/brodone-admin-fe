@@ -14,7 +14,7 @@ RUN npm cache verify
 RUN npm install
 
 # Generate the build of the application
-RUN npm run build
+RUN npm run build --prod
 
 # Stage 2: Serve app with nginx server
 # Use official nginx image as the base image

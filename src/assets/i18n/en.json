@@ -79,5 +79,6 @@
   "password": "password",
   "cityId": "city",
   "message": "Message",
+  "catgories": "Catgories",
   "printer": "printer"
 }

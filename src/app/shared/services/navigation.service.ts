@@ -227,7 +227,24 @@ export class NavigationService {
       type: "dropDown",
       icon: "i-Mail-2",
       sub: [
-        { icon: "i-Clock-3", name: "القائمة", state: "/message", type: "link" },
+        {
+          icon: "i-Clock-3",
+          name: "جميع الرسائل",
+          state: "/message",
+          type: "link",
+        },
+        {
+          icon: "i-Add-User",
+          name: "الرسائل المستلمة",
+          state: "/message/recieved",
+          type: "link",
+        },
+        {
+          icon: "i-Email",
+          name: "الرسائل المرسلة",
+          state: "/message/send",
+          type: "link",
+        },
       ],
     },
     {

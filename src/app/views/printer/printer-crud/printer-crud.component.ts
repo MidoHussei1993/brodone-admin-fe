@@ -114,12 +114,13 @@ export class PrinterCrudComponent implements OnInit {
       },
       (err) => {
         this.spinner.hide();
-        // this.notifier.notify('error',err)
+        this.notifier.notify("error", err.error.message);
       }
     );
   }
   edit() {
     let body = this.form.value;
+    body.id = this.route.snapshot.params.id;
     this.spinner.show();
     this.printHouseService.update(body).subscribe(
       (result) => {
@@ -127,8 +128,9 @@ export class PrinterCrudComponent implements OnInit {
         this.notifier.notify("success", this.translate.instant("edited"));
       },
       (err) => {
+        console.log(err);
         this.spinner.hide();
-        // this.notifier.notify('error',err)
+        this.notifier.notify("error", err.error.message);
       }
     );
   }

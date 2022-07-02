@@ -62,7 +62,7 @@
       </div>
     </form>
 
-    <div class="row">
+    <div class="row" *ngIf="mode == 'View' || mode == 'Edit'">
       <div class="col-md-6">
         <div class="card" (click)="uploadImage.click()">
           <div class="card-header">

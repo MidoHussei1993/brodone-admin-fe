@@ -64,4 +64,8 @@ export class MsgService {
   reply(body: ReplyMassage_): Observable<any> {
     return this.httpClient.post(API.reply, body);
   }
+
+  getAlluser(): Observable<any> {
+    return this.httpClient.get(END_POINTS.users.getUsers);
+  }
 }

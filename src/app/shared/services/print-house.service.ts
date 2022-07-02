@@ -34,7 +34,7 @@ export class PrintHouseService {
   }
 
   update(body: any): Observable<any> {
-    return this.httpClient.post(API.edit, body);
+    return this.httpClient.put(API.edit, body);
   }
   getById(id: number): Observable<any> {
     return this.httpClient.get(API.getById(id));

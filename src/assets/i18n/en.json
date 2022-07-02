@@ -80,5 +80,12 @@
   "cityId": "city",
   "message": "Message",
   "catgories": "Catgories",
+  "createMsg": "Create Message",
+  "users": "Users",
+  "title": "Titel",
+  "msgBody": "Message Body",
+  "allMsg": "All Messages",
+  "sendMsg": "Sent Messages",
+  "recievedMsg": "Recieved Messages",
   "printer": "printer"
 }

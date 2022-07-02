@@ -59,7 +59,10 @@
             formControlName="categoryId"
             class="form-control form-control-rounded"
           >
-            <option *ngFor="let item of categoryList; let i = index" [value]="item.id">
+            <option
+              *ngFor="let item of categoryList; let i = index"
+              [value]="item.id"
+            >
               {{ item.name }}
             </option>
           </select>
@@ -104,7 +107,7 @@
             <div class="col-6">
               <label class="radio radio-info"
                 ><input
-                formControlName="imageOverlayEnabled"
+                  formControlName="imageOverlayEnabled"
                   [value]="true"
                   name="imageOverlayEnabled"
                   type="radio"
@@ -116,7 +119,7 @@
             <div class="col-6">
               <label class="radio radio-info"
                 ><input
-                formControlName="imageOverlayEnabled"
+                  formControlName="imageOverlayEnabled"
                   [value]="false"
                   name="imageOverlayEnabled"
                   type="radio"
@@ -141,17 +144,15 @@
           </div>
         </div>
       </div>
-
-      
     </form>
 
     <div class="row mt-3">
       <div class="col-md-6 col-sm-12">
-        <div class="card  border h-100">
+        <div class="card border h-100">
           <div class="card-header">
-           <h5>
-            {{ "size" | translate }}
-           </h5>
+            <h5>
+              {{ "size" | translate }}
+            </h5>
           </div>
           <div class="card-body">
             <div class="row">
@@ -162,6 +163,7 @@
                 <label class="checkbox checkbox-info">
                   <input
                     checked=""
+                    [value]="item.sizeCode"
                     [(ngModel)]="item.selected"
                     type="checkbox"
                   />
@@ -177,9 +179,9 @@
       <div class="col-md-6 col-sm-12">
         <div class="card border">
           <div class="card-header">
-           <h5>
-            {{ "color" | translate }}
-           </h5>
+            <h5>
+              {{ "color" | translate }}
+            </h5>
           </div>
           <div class="card-body">
             <div class="row">
@@ -187,17 +189,20 @@
                 class="col-md-4 col-sm-6 d-flex"
                 *ngFor="let item of colorList; let i = index"
               >
-                <label class="checkbox checkbox-info text" >
+                <label class="checkbox checkbox-info text">
                   <input
                     checked=""
                     [(ngModel)]="item.selected"
                     type="checkbox"
                   />
-                  <span [style]="{'background-color':item.hexa}" class="border font-weight-bold px-2 text-white"> {{ item.colorName }} </span
+                  <span
+                    [style]="{ 'background-color': item.hexa }"
+                    class="border font-weight-bold px-2 text-white"
+                  >
+                    {{ item.colorName }} </span
                   ><span class="checkmark"></span>
                 </label>
                 <!-- <div class="" style="width:30px;height:30px;background-color:{{item.hexa}};"></div> -->
-
               </div>
             </div>
           </div>
@@ -207,25 +212,25 @@
 
     <div class="row mt-3">
       <div class="col-md-6 col-sm-12">
-        <div class="card  border" >
+        <div class="card border">
           <div class="card-body">
             <div class="d-flex justify-content-between">
-                <div class="p-2">
-                  <h5>
-                    {{ "pricingList" | translate }}
-                  </h5>
-                </div>
-                <div class="p-2">
-                  <button
-                    (click)="openListPriceItemModal()"
-                    type="button"
-                    class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
-                  >
-                    <i class="fas fa-plus"></i>
-                    {{ "create" | translate }}
-                  </button>
-                </div>
+              <div class="p-2">
+                <h5>
+                  {{ "pricingList" | translate }}
+                </h5>
               </div>
+              <div class="p-2">
+                <button
+                  (click)="openListPriceItemModal()"
+                  type="button"
+                  class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                >
+                  <i class="fas fa-plus"></i>
+                  {{ "create" | translate }}
+                </button>
+              </div>
+            </div>
             <div
               class="card bg-info my-2"
               *ngFor="
@@ -268,49 +273,53 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-sm-12" *ngIf=" mainObject.images">
-        <div class="card border" >
+      <div class="col-md-6 col-sm-12" *ngIf="mainObject.images">
+        <div class="card border">
           <div class="card-body">
             <div class="d-flex justify-content-between">
-                <div class="p-2">
-                  <h5>
-                    {{ "proudctImage" | translate }}
-                  </h5>
-                </div>
-                <div class="p-2">
-                  <button
-                    (click)="openUploadImageModal()"
-                    type="button"
-                    class="btn btn-rounded btn-success px-4 mx-4 text-white d-inline-block"
-                  >
-                    <i class="fas fa-plus"></i>
-                    {{ "create" | translate }}
-                  </button>
-                </div>
+              <div class="p-2">
+                <h5>
+                  {{ "proudctImage" | translate }}
+                </h5>
               </div>
+              <div class="p-2">
+                <button
+                  (click)="openUploadImageModal()"
+                  type="button"
+                  class="btn btn-rounded btn-success px-4 mx-4 text-white d-inline-block"
+                >
+                  <i class="fas fa-plus"></i>
+                  {{ "create" | translate }}
+                </button>
+              </div>
+            </div>
             <div
               class="card border bg-dark my-2"
-              *ngFor="let item of mainObject.images; let i=index"
+              *ngFor="let item of mainObject.images; let i = index"
             >
               <div class="card-body py-1">
                 <div class="d-flex justify-content-between">
                   <div class="p-2 text-white">
-                    <img [src]="item.url" style="border-radius: 50%;" class="img-responsive img-fluid border" width="60px" height="60px" alt="">
-                    
+                    <img
+                      [src]="item.url"
+                      style="border-radius: 50%"
+                      class="img-responsive img-fluid border"
+                      width="60px"
+                      height="60px"
+                      alt=""
+                    />
                   </div>
-                  <div class="p-2   pt-3">
-                  <h5 class="text-white">
-                    {{ "orderNo" | translate }}  : {{item.orderNo}}
-                  </h5>
-                    
+                  <div class="p-2 pt-3">
+                    <h5 class="text-white">
+                      {{ "orderNo" | translate }} : {{ item.orderNo }}
+                    </h5>
                   </div>
-                  
 
                   <div class="p-1 pt-3">
                     <span
                       title="{{ 'Delete' | translate }}"
                       class="badge badge-pill badge-danger p-2 mr-1"
-                      >
+                    >
                       <!-- (click)="deletePricing(i)" -->
                       <i
                         title="{{ 'Delete' | translate }}"
@@ -324,26 +333,20 @@
           </div>
         </div>
       </div>
-      
     </div>
 
-
     <div class="row my-5" *ngIf="mode != 'View'">
-        <div class="col-md-4 col-sm-12 mx-auto text-center">
-          <button
-            (click)="submit()"
-            class="btn btn-primary btn-block btn-hover-scale"
-          >
-            {{ "save" | translate }}
-          </button>
-        </div>
+      <div class="col-md-4 col-sm-12 mx-auto text-center">
+        <button
+          (click)="submit()"
+          class="btn btn-primary btn-block btn-hover-scale"
+        >
+          {{ "save" | translate }}
+        </button>
       </div>
-
+    </div>
   </div>
 </div>
-
-
-
 
 <!-- modal price -->
 <ng-template #priceItemForm let-modal>
@@ -444,56 +447,53 @@
   </div>
 </ng-template>
 
-
 <!-- modal price -->
 <ng-template #uploadImageModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title text-center mx-auto" id="modal-title">
-        {{ "proudctImage" | translate }}
-      </h4>
-      
+  <div class="modal-header">
+    <h4 class="modal-title text-center mx-auto" id="modal-title">
+      {{ "proudctImage" | translate }}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <label class="form-label">{{ "orderNo" | translate }}</label>
+        <input
+          type="number"
+          min="1"
+          max="5"
+          [(ngModel)]="imageObject.order"
+          class="form-control form-control-rounded"
+          placeholder="{{ 'orderNo' | translate }}"
+        />
+      </div>
+
+      <div class="col-12 mt-3">
+        <label class="form-label">{{ "proudctImage" | translate }}</label>
+        <input
+          (change)="handleInputChange($event)"
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          class="form-control form-control-rounded"
+        />
+      </div>
     </div>
-    <div class="modal-body">
-        <div class="row">
-          <div class="col-12  mt-3">
-            <label class="form-label">{{ "orderNo" | translate }}</label>
-            <input
-              type="number"
-              min="1"
-              max="5"
-              [(ngModel)]="imageObject.order"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'orderNo' | translate }}"
-            />
-          </div>
-  
-          <div class="col-12 mt-3">
-            <label class="form-label">{{ "proudctImage" | translate }}</label>
-            <input
-              (change)="handleInputChange($event)"
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              class="form-control form-control-rounded"
-            />
-          </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        [disabled]="!imageObject.order && !imageObject.image"
-        class="btn btn-success btn-rounded"
-        (click)="uploadProductImage()"
-      >
-        {{ "save" | translate }}
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-danger btn-rounded mx-2"
-        (click)="modal.dismiss('cancel')"
-      >
-        {{ "cancel" | translate }}
-      </button>
-    </div>
-  </ng-template>
-  
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      [disabled]="!imageObject.order && !imageObject.image"
+      class="btn btn-success btn-rounded"
+      (click)="uploadProductImage()"
+    >
+      {{ "save" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-rounded mx-2"
+      (click)="modal.dismiss('cancel')"
+    >
+      {{ "cancel" | translate }}
+    </button>
+  </div>
+</ng-template>

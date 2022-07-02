@@ -50,6 +50,10 @@ export class END_POINTS {
     getCountOfUnRead: services.mkt + "message/count",
   };
 
+  public static users = {
+    getUsers: services.mkt + "admin/dashboard/users",
+  };
+
   public static category = {
     getById: (categoryId: number): string =>
       services.mkt + "category/" + categoryId,

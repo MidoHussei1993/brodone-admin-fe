@@ -13,7 +13,7 @@ import { OrderService } from "../services/order.service";
   styleUrls: ["./order-list.component.scss"],
 })
 export class OrderListComponent implements OnInit {
-  @ViewChild('modalConfirm', { static: false }) modalConfirm;
+  @ViewChild("modalConfirm", { static: false }) modalConfirm;
   orderList: Order[] = [];
   titles: string[] = [
     "orderId",
@@ -36,10 +36,10 @@ export class OrderListComponent implements OnInit {
   filter: OrderFilter = new OrderFilter();
   pagination: Pagination = new Pagination();
 
-  currentAction: string = '';
-  printHouseList:{compnay:string,id:number}[]= [];
-  selectedCompanyId:number = null;
-  currentOrderId:number = null;
+  currentAction: string = "";
+  printHouseList: { compnay: string; id: number }[] = [];
+  selectedCompanyId: number = null;
+  currentOrderId: number = null;
 
   constructor(
     private orderService: OrderService,
@@ -88,10 +88,10 @@ export class OrderListComponent implements OnInit {
       }
     );
   }
-  getPrintHouseList(){
+  getPrintHouseList() {
     this.printHouseService.getPrintHouseList().subscribe(
       (res: any) => {
-        this.printHouseList = res.responsePayload
+        this.printHouseList = res.responsePayload;
       },
       (err) => {
         this.spinner.hide();
@@ -112,30 +112,37 @@ export class OrderListComponent implements OnInit {
   }
 
   confirm() {
-    this.modalService.open(this.modalConfirm, { ariaLabelledBy: 'modal-basic-title', centered: true })
-    .result.then((result) => {
-      console.log(result)
-    }, (reason) => {
-      console.log(reason);
-    });
+    this.modalService
+      .open(this.modalConfirm, {
+        ariaLabelledBy: "modal-basic-title",
+        centered: true,
+      })
+      .result.then(
+        (result) => {
+          console.log(result);
+        },
+        (reason) => {
+          console.log(reason);
+        }
+      );
   }
   navigateTO(order: { event: Order; type: string }) {
     this.reset();
     switch (order.type) {
-      case 'assign':
-      this.currentAction = order.type;
-      this.currentOrderId = order.event.id;
-      this.confirm()
-      break;
-      case 'revoke':
+      case "assign":
         this.currentAction = order.type;
         this.currentOrderId = order.event.id;
-        this.confirm()
-      break;
-      case 'withdraw':
+        this.confirm();
+        break;
+      case "revoke":
         this.currentAction = order.type;
         this.currentOrderId = order.event.id;
-        this.confirm()
+        this.confirm();
+        break;
+      case "withdraw":
+        this.currentAction = order.type;
+        this.currentOrderId = order.event.id;
+        this.confirm();
         break;
 
       default:
@@ -143,25 +150,26 @@ export class OrderListComponent implements OnInit {
     }
   }
 
-  setSelectedCompany(id:number) {
-    console.log(id)
+  setSelectedCompany(id: number) {
+    console.log(id);
     this.selectedCompanyId = id;
   }
-  reset(){
+  reset() {
     this.currentOrderId = null;
     this.selectedCompanyId = null;
   }
 
   applyAction() {
+    console.log(this.currentAction);
     switch (this.currentAction) {
-      case 'assign':
+      case "assign":
         this.assign();
-      break;
-      case 'revoke':
-        
-      break;
-      case 'withdraw':
-       
+        break;
+      case "revoke":
+        this.revoke();
+        break;
+      case "withdraw":
+        this.withdraw();
         break;
 
       default:
@@ -169,17 +177,60 @@ export class OrderListComponent implements OnInit {
     }
   }
 
-  assign(){
-    if(!this.selectedCompanyId) return;
+  assign() {
+    if (!this.selectedCompanyId) return;
     this.spinner.show();
-    this.orderService.assign({
-      orderId: this.currentOrderId,
-      printingHouse: +this.selectedCompanyId
-    }).subscribe(res => {
-      this.modalService.dismissAll();
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-    })
+    this.orderService
+      .assign({
+        orderId: this.currentOrderId,
+        printingHouse: +this.selectedCompanyId,
+      })
+      .subscribe(
+        (res) => {
+          this.modalService.dismissAll();
+          this.spinner.hide();
+        },
+        (err) => {
+          this.spinner.hide();
+        }
+      );
+  }
+
+  revoke() {
+    if (!this.selectedCompanyId) return;
+    this.spinner.show();
+    this.orderService
+      .revoke({
+        orderId: this.currentOrderId,
+        printingHouse: +this.selectedCompanyId,
+      })
+      .subscribe(
+        (res) => {
+          this.modalService.dismissAll();
+          this.spinner.hide();
+        },
+        (err) => {
+          this.spinner.hide();
+        }
+      );
+  }
+
+  withdraw() {
+    if (!this.selectedCompanyId) return;
+    this.spinner.show();
+    this.orderService
+      .withdraw({
+        orderId: this.currentOrderId,
+        printingHouse: +this.selectedCompanyId,
+      })
+      .subscribe(
+        (res) => {
+          this.modalService.dismissAll();
+          this.spinner.hide();
+        },
+        (err) => {
+          this.spinner.hide();
+        }
+      );
   }
 }

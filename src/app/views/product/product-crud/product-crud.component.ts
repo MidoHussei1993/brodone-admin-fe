@@ -99,10 +99,10 @@ export class ProductCrudComponent implements OnInit {
         this.spinner.hide();
         this.busyLoading = false;
         this.form.patchValue({ ...res.data, ...res.data.designDetails });
+        this.mainObject = res.data;
         this.getCategoryDropdown();
         this.getColors();
         this.getSizesList();
-        this.mainObject = res.data;
         res.data.pricingList.map((item) => this.AddInPricingList(item));
       },
       (err) => {
@@ -146,7 +146,7 @@ export class ProductCrudComponent implements OnInit {
       if (this.mode == FormMode.Edit || this.mode == FormMode.View) {
         this.sizeList.map((size) => {
           this.mainObject.availableSizes.map((item) => {
-            if (size.id == item.id) {
+            if (size.sizeCode == item.sizeLabel) {
               size.selected = true;
             }
           });
@@ -266,6 +266,7 @@ export class ProductCrudComponent implements OnInit {
   }
   edit() {
     let body = this.form.value;
+    body.id = this.route.snapshot.params.id;
     body.designDetails = {
       imageOverlayEnabled: body.imageOverlayEnabled,
       imageOverlayCost: body.imageOverlayCost,
@@ -280,7 +281,7 @@ export class ProductCrudComponent implements OnInit {
     body.availableSizes = this.sizeList
       .filter((item) => item.selected == true)
       .map((item) => {
-        return { sizeLabel: item.id };
+        return { sizeLabel: item.sizeCode };
       });
 
     console.log(body);

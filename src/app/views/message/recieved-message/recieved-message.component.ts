@@ -3,16 +3,15 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Pagination } from "src/app/shared/models";
 import { PrintHouseService } from "src/app/shared/services/print-house.service";
-import { OrderFilter } from "../../orders/models";
 import { Message, MessageFilter, SentMassage_ } from "../models";
 import { MsgService } from "../services/msg.service";
 
 @Component({
-  selector: "app-msg-list",
-  templateUrl: "./msg-list.component.html",
-  styleUrls: ["./msg-list.component.scss"],
+  selector: "app-recieved-message",
+  templateUrl: "./recieved-message.component.html",
+  styleUrls: ["./recieved-message.component.scss"],
 })
-export class MsgListComponent implements OnInit {
+export class RecievedMessageComponent implements OnInit {
   messageList: Message[] = [];
   @ViewChild("modalConfirm", { static: false }) modalConfirm;
 
@@ -59,7 +58,7 @@ export class MsgListComponent implements OnInit {
 
   getmessageList() {
     this.spinner.show();
-    this.msgService.getAll(this.filter).subscribe(
+    this.msgService.getAllReceived(this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
         this.messageList = res.content;

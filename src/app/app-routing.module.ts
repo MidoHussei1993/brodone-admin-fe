@@ -114,7 +114,7 @@ const routes: Routes = [
   {
     path: "",
     component: AdminLayoutSidebarCompactComponent,
-    // canActivate: [AuthGaurd],
+    canActivate: [AuthGaurd],
     children: adminRoutes,
   },
   {

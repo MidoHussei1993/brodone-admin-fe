@@ -7,14 +7,19 @@ import { AppComponent } from "./app.component";
 import { SharedModule } from "./shared/shared.module";
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataService } from "./shared/inmemory-db/inmemory-db.service";
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from "@angular/common/http";
 import { JwtInterceptor } from "./core/Http/interceptors";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { NotifierModule } from 'angular-notifier';
+import { NotifierModule } from "angular-notifier";
 import { NgxSpinnerModule } from "ngx-spinner";
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { ErrorInterceptor } from "./core/Http/interceptors/error.interceptor";
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
 }
 @NgModule({
   declarations: [AppComponent],
@@ -29,17 +34,18 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AppRoutingModule,
     TranslateModule.forRoot({
-      defaultLanguage:'ar',
+      defaultLanguage: "ar",
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
       },
-  }),
-    NotifierModule
+    }),
+    NotifierModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

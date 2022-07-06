@@ -245,11 +245,6 @@ export class ProductCrudComponent implements OnInit {
       .map((item) => {
         return { sizeLabel: item.id };
       });
-    console.log(body);
-    console.log(
-      "🚀 ~ file: product-crud.component.ts ~ line 249 ~ ProductCrudComponent ~ create ~ body",
-      body
-    );
     this.spinner.show();
     this.productService.create(body).subscribe(
       (result) => {
@@ -266,7 +261,7 @@ export class ProductCrudComponent implements OnInit {
   }
   edit() {
     let body = this.form.value;
-    body.id = this.route.snapshot.params.id;
+    body.id = +this.route.snapshot.params.id;
     body.designDetails = {
       imageOverlayEnabled: body.imageOverlayEnabled,
       imageOverlayCost: body.imageOverlayCost,

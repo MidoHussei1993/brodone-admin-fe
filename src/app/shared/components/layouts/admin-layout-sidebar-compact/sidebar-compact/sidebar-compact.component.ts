@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from "@angular/core";
 import {
   NavigationService,
   IMenuItem,
-  IChildItem
+  IChildItem,
 } from "../../../../services/navigation.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { filter } from "rxjs/operators";
@@ -11,7 +11,7 @@ import { Utils } from "../../../../utils";
 @Component({
   selector: "app-sidebar-compact",
   templateUrl: "./sidebar-compact.component.html",
-  styleUrls: ["./sidebar-compact.component.scss"]
+  styleUrls: ["./sidebar-compact.component.scss"],
 })
 export class SidebarCompactComponent implements OnInit {
   selectedItem: IMenuItem;
@@ -24,18 +24,25 @@ export class SidebarCompactComponent implements OnInit {
     this.updateSidebar();
     // CLOSE SIDENAV ON ROUTE CHANGE
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(routeChange => {
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((routeChange) => {
         this.closeChildNav();
         if (Utils.isMobile()) {
           this.navService.sidebarState.sidenavOpen = false;
         }
       });
-
-    this.navService.menuItems$.subscribe(items => {
-      this.nav = items;
-      this.setActiveFlag();
-    });
+    let role: { id: number; authority: string }[] = JSON.parse(
+      localStorage.getItem("roles")
+    );
+    if (role.length) {
+      this.navService.menuItems$.subscribe((items) => {
+        this.nav = items.filter((item) =>
+          item.role.includes(role[0].authority)
+        );
+        console.log(this.nav);
+        this.setActiveFlag();
+      });
+    }
   }
 
   selectItem(item) {
@@ -52,7 +59,7 @@ export class SidebarCompactComponent implements OnInit {
     this.setActiveMainItem(item);
   }
   setActiveMainItem(item) {
-    this.nav.forEach(item => {
+    this.nav.forEach((item) => {
       item.active = false;
     });
     item.active = true;
@@ -61,14 +68,14 @@ export class SidebarCompactComponent implements OnInit {
   setActiveFlag() {
     if (window && window.location) {
       const activeRoute = window.location.hash || window.location.pathname;
-      this.nav.forEach(item => {
+      this.nav.forEach((item) => {
         item.active = false;
         if (activeRoute.indexOf(item.state) !== -1) {
           this.selectedItem = item;
           item.active = true;
         }
         if (item.sub) {
-          item.sub.forEach(subItem => {
+          item.sub.forEach((subItem) => {
             subItem.active = false;
             if (activeRoute.indexOf(subItem.state) !== -1) {
               this.selectedItem = item;
@@ -77,7 +84,7 @@ export class SidebarCompactComponent implements OnInit {
               // debugger;
             }
             if (subItem.sub) {
-              subItem.sub.forEach(subChildItem => {
+              subItem.sub.forEach((subChildItem) => {
                 if (activeRoute.indexOf(subChildItem.state) !== -1) {
                   this.selectedItem = item;
                   item.active = true;

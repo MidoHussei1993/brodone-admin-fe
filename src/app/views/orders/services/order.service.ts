@@ -17,14 +17,14 @@ export class OrderService {
       params: {
         ...(filter.page && { page: filter.page - 1 }),
         ...(filter.size && { size: filter.size }),
-        // ...(filter.fromDate && { fromDate: filter.fromDate }),
-        // ...(filter.toDate && { toDate: filter.toDate }),
+        ...(filter.fromDate && { fromDate: filter.fromDate }),
+        ...(filter.toDate && { toDate: filter.toDate }),
         ...(filter.printerId && { printerId: filter.printerId }),
         ...(filter.customerId && { customerId: filter.customerId }),
         ...(filter.orderId && { orderId: filter.orderId }),
         ...(filter.username && { username: filter.username }),
-        fromDate: '20-05-2020',
-        toDate: '25-05-2024',
+        // fromDate: '20-05-2020',
+        // toDate: '25-05-2024',
       },
     });
   }
@@ -39,6 +39,4 @@ export class OrderService {
   withdraw(body: OrderOperation): Observable<any> {
     return this.httpClient.delete(API.withdraw);
   }
-
-
 }

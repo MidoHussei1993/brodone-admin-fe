@@ -36,7 +36,7 @@ export class CategoryService {
   }
 
   update(body: any): Observable<any> {
-    return this.httpClient.post(API.addEditcategory, body);
+    return this.httpClient.put(API.addEditcategory, body);
   }
 
   getDropdown(): Observable<any> {

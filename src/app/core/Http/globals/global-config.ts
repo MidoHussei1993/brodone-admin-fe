@@ -58,7 +58,7 @@ export class END_POINTS {
     getById: (categoryId: number): string =>
       services.mkt + "category/" + categoryId,
     delete: (categoryId: number): string =>
-      services.mkt + "category/" + categoryId,
+      services.mkt + "admin/category/" + categoryId,
     addEditcategory: services.mkt + "admin/category",
     getAll: services.mkt + "category/all/pages",
     dropDown: services.mkt + "category/all",

@@ -63,9 +63,11 @@ export class SigninComponent implements OnInit {
       (res) => {
         localStorage.setItem("token", res.access_token);
         localStorage.setItem("user", JSON.stringify(res));
+        localStorage.setItem("roles", JSON.stringify(res.Roles));
         this.spinner.hide();
+
         this.auth.signin(this.signinForm.value).subscribe((result) => {
-            this.loading = false;
+          this.loading = false;
           this.router.navigateByUrl("/dashboard/v1");
         });
       },

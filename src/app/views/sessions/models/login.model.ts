@@ -1,7 +1,7 @@
 export class LoginModel {
   constructor() {
-    this.grant_type = 'password';
-    this.scope = 'webclient';
+    this.grant_type = "password";
+    this.scope = "webclient";
     // this.client_id = 'Taba@Services2022Client';
     // this.client_secret = 'Taba$ecritKey';
   }

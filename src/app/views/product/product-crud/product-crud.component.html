@@ -335,14 +335,25 @@
       </div>
     </div>
 
-    <div class="row my-5" *ngIf="mode != 'View'">
-      <div class="col-md-4 col-sm-12 mx-auto text-center">
+    <div class="d-flex justify-content-between my-5">
+      <div class="p-2" *ngIf="mode != 'View'">
         <button
           (click)="submit()"
-          class="btn btn-primary btn-block btn-hover-scale"
+          type="submit"
+          class="btn btn-info btn-block btn-hover-scale px-5"
         >
           {{ "save" | translate }}
         </button>
+      </div>
+
+      <div class="p-2">
+        <a
+          routerLink="/product"
+          type="submit"
+          class="btn btn-dark btn-block btn-hover-scale px-5"
+        >
+          {{ "back" | translate }}
+        </a>
       </div>
     </div>
   </div>

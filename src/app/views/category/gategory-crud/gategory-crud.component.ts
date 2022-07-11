@@ -88,7 +88,7 @@ export class GategoryCrudComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
-          this.getCatecoryById(this.route.snapshot.params.id);
+          this.getCategoryImage();
         },
         (err) => {
           this.spinner.show();
@@ -122,7 +122,7 @@ export class GategoryCrudComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
-          this.getCatecoryById(this.route.snapshot.params.id);
+          this.getCategoryCanvas();
         },
         (err) => {
           this.spinner.show();

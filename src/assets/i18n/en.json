@@ -87,5 +87,8 @@
   "allMsg": "All Messages",
   "sendMsg": "Sent Messages",
   "recievedMsg": "Recieved Messages",
+  "back": "Back",
+  "done": "Done",
+  "printers": "Printers",
   "printer": "printer"
 }

@@ -180,7 +180,8 @@ export class ProductCrudComponent implements OnInit {
       })
     );
     this.priceForm.reset();
-    console.log(this.priceForm.value);
+    this.modalService.dismissAll();
+    this.notifier.notify("success", this.translate.instant("done"));
   }
 
   deletePricing(index: number) {
@@ -209,6 +210,7 @@ export class ProductCrudComponent implements OnInit {
     this.productService.uploadProductImage(this.imageObject).subscribe(
       (result) => {
         this.spinner.hide();
+        this.notifier.notify("success", this.translate.instant("done"));
       },
       (err) => {
         this.spinner.hide();

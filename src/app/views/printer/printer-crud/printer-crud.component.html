@@ -7,7 +7,7 @@
   </div>
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="submit()">
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{ "firstName" | translate }}</label>
           <input
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{ "email" | translate }}</label>
           <input
@@ -93,7 +93,7 @@
         </div>
       </div>
 
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{ "phoneNo" | translate }}</label>
           <input
@@ -114,11 +114,33 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <div class="row my-2">
+        <div class="col-md-4 form-group mb-3">
+          <label for="picker1">
+            {{ "rigion" | translate }}
+          </label>
+          <select
+            (change)="getRegionCities($event.target['value'])"
+            class="form-control form-control-rounded"
+          >
+            <option [value]="null"></option>
+            <option
+              *ngFor="let item of rigionList; let i = index"
+              [value]="item.id"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+
         <div class="col-md-4 form-group mb-3">
           <label for="picker1">
             {{ "cityId" | translate }}
           </label>
           <select
+            [disabled]="!cityList.length"
             formControlName="cityId"
             class="form-control form-control-rounded"
           >
@@ -143,7 +165,7 @@
         </div>
       </div>
 
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{
             "businessClassification" | translate
@@ -189,7 +211,7 @@
         </div>
       </div>
 
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{ "compnayName" | translate }}</label>
           <input
@@ -232,7 +254,7 @@
         </div>
       </div>
 
-      <div class="row my-5">
+      <div class="row my-2">
         <div class="col-md-6 col-sm-12">
           <label class="form-label">{{ "tradMark" | translate }}</label>
           <input

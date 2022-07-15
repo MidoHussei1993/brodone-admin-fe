@@ -43,4 +43,8 @@ export class PrintHouseService {
   getCityDropdown(): Observable<any> {
     return this.httpClient.get(API.cityDropdown);
   }
+
+  getRegionCities(regionId): Observable<any> {
+    return this.httpClient.get(API.getRegionCities(regionId));
+  }
 }

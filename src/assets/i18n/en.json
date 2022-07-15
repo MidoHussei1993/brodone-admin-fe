@@ -20,6 +20,7 @@
   "list": "List",
   "assign": "Assign",
   "revoke": "Revoke",
+  "pick": "Pick",
   "withdraw": "Withdraw",
   "printHouse": "Print House",
   "create": "Create",
@@ -90,5 +91,10 @@
   "back": "Back",
   "done": "Done",
   "printers": "Printers",
+  "rigion": "Region",
+  "status": "Status",
+  "updateStatus": "Update Order Status",
+  "comment": "Comment",
+  "myOrder": "My Order",
   "printer": "printer"
 }

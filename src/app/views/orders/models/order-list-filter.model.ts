@@ -8,6 +8,7 @@ export class OrderFilter extends ListPage {
     this.printerId = null;
     this.customerId = null;
     this.orderId = null;
+    this.myOrder = null;
   }
   fromDate: string;
   toDate: string;
@@ -15,4 +16,5 @@ export class OrderFilter extends ListPage {
   customerId: number;
   orderId: number;
   username: string;
+  myOrder: boolean;
 }

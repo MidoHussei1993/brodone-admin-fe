@@ -25,6 +25,7 @@
           item != 'ExpiryDateFrom' &&
           item != 'StartDate' &&
           item != 'EndDate' &&
+          item != 'myOrder' &&
           item != 'ExpiryDateTo'
         "
         type="text"
@@ -32,6 +33,16 @@
         class="form-control form-control-rounded"
         placeholder="{{ item | translate }}"
       />
+
+      <label class="checkbox checkbox-info" *ngIf="item == 'myOrder'">
+        <input
+          checked=""
+          [(ngModel)]="filter[item]"
+          [value]="true"
+          type="checkbox"
+        />
+        <span class="checkmark"></span>
+      </label>
     </div>
   </div>
 </div>

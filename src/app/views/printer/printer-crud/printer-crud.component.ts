@@ -24,6 +24,7 @@ export class PrinterCrudComponent implements OnInit {
   currentLanguage: string = "";
   formSubmited;
   cityList: any[] = [];
+  rigionList: any[] = [];
 
   constructor(
     private router: Router,
@@ -71,6 +72,13 @@ export class PrinterCrudComponent implements OnInit {
 
   getCityDropdown() {
     this.printHouseService.getCityDropdown().subscribe((res) => {
+      this.rigionList = res.responsePayload;
+    });
+  }
+
+  getRegionCities(regionId) {
+    console.log(regionId);
+    this.printHouseService.getRegionCities(regionId).subscribe((res) => {
       this.cityList = res.responsePayload;
     });
   }

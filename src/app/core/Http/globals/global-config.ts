@@ -24,10 +24,16 @@ export class END_POINTS {
 
   public static orders = {
     get: services.mkt + "admin/dashboard/allOrders",
+    myOrder: services.mkt + "admin/dashboard/myOrders",
     assign: services.mkt + "admin/dashboard/assign",
-    revoke: services.mkt + "admin/dashboard/revoke",
-    withdraw: services.mkt + "admin/dashboard/withdraw",
     printhouse: services.mkt + "admin/dashboard/printhouse",
+    revoke: (printingHouse: number, order: number): string =>
+      services.mkt + `admin/dashboard/revoke/${printingHouse}/${order}`,
+    withdraw: (order: number): string =>
+      services.mkt + `admin/dashboard/reject/${order}`,
+    getOrderStatus: services.mkt + "admin/dashboard/status",
+    updateOrderStatus: services.mkt + "admin/dashboard/update",
+    pickOrder: services.mkt + "admin/dashboard/pick",
   };
   public static printhouse = {
     printhouse: services.mkt + "admin/dashboard/printhouse",
@@ -37,6 +43,8 @@ export class END_POINTS {
     getById: (categoryId: number): string =>
       services.usrApi + "v1/admin/printing/" + categoryId,
     cityDropdown: services.mkt + "city/region",
+    getRegionCities: (regionId: number): string =>
+      services.mkt + `city/region/${regionId}/city`,
   };
 
   public static message = {

@@ -6,12 +6,14 @@ import {
   HttpInterceptor,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
 
 declare var require;
 var jwtDecode = require("jwt-decode");
 
 @Injectable({ providedIn: "root" })
 export class JwtInterceptor implements HttpInterceptor {
+  // constructor(public translateService: TranslateService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -24,6 +26,7 @@ export class JwtInterceptor implements HttpInterceptor {
       header["accept"] = "application/json, text/plain, *";
       //   header["language"] = localStorage.getItem("language");
     }
+    header["Accept-Language"] = "ar";
 
     request = request.clone({
       setHeaders: header,

@@ -5,6 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Pagination } from "src/app/shared/models";
 import { PrintHouseService } from "src/app/shared/services/print-house.service";
 import { IsAdmin } from "src/util/acccess-Store";
+import { MsgService } from "../../message/services/msg.service";
 import { Order, OrderFilter, UpdateOrderStatus } from "../models";
 import { OrderService } from "../services/order.service";
 
@@ -65,11 +66,14 @@ export class OrderListComponent implements OnInit {
     orderStatus: null,
     comments: "",
   };
+  userList: [] = [];
+  printersLst: [] = [];
 
   constructor(
     private orderService: OrderService,
     private printHouseService: PrintHouseService,
     private modalService: NgbModal,
+    private msgService: MsgService,
     private spinner: NgxSpinnerService
   ) {}
 
@@ -84,6 +88,15 @@ export class OrderListComponent implements OnInit {
     this.getOrderList();
     this.getPrintHouseList();
     this.getOrderStatusList();
+    this.getAllUser();
+  }
+  getAllUser() {
+    this.msgService.getAlluser().subscribe(
+      (res: any) => {
+        this.userList = res.responsePayload;
+      },
+      (err) => {}
+    );
   }
 
   getOrderStatusList() {
@@ -171,9 +184,8 @@ export class OrderListComponent implements OnInit {
         this.confirm();
         break;
       case "revoke":
-        this.currentAction = order.type;
-        this.currentOrderId = order.event.id;
-        this.confirm();
+        if (order.event.orderStatus == "PAIED") return;
+        this.revoke(order.event);
         break;
       case "withdraw":
         this.currentAction = order.type;
@@ -211,9 +223,6 @@ export class OrderListComponent implements OnInit {
       case "assign":
         this.assign();
         break;
-      case "revoke":
-        this.revoke();
-        break;
       // case "withdraw":
       //   this.withdraw();
       //   break;
@@ -242,17 +251,15 @@ export class OrderListComponent implements OnInit {
       );
   }
 
-  revoke() {
-    if (!this.selectedCompanyId) return;
+  revoke(item: Order) {
     this.spinner.show();
     this.orderService
       .revoke({
-        orderId: this.currentOrderId,
-        printingHouse: +this.selectedCompanyId,
+        orderId: item.id,
+        printingHouse: +item.assignedTo,
       })
       .subscribe(
         (res) => {
-          this.modalService.dismissAll();
           this.spinner.hide();
           this.getOrderList();
         },

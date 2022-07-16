@@ -5,8 +5,8 @@ export class OrderFilter extends ListPage {
     super();
     this.fromDate = null;
     this.toDate = null;
-    this.printerId = null;
-    this.customerId = null;
+    // this.printerId = null;
+    // this.customerId = null;
     this.orderId = null;
     this.myOrder = null;
   }

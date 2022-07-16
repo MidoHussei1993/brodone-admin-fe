@@ -113,7 +113,11 @@
               style="border-radius: 50%"
               width="50"
               height="50"
-              *ngIf="prop == 'imageUrl' || prop == 'basicImageForDesignUrl'  || prop == 'mainImageUrl'"
+              *ngIf="
+                prop == 'imageUrl' ||
+                prop == 'basicImageForDesignUrl' ||
+                prop == 'mainImageUrl'
+              "
             />
           </td>
           <td class="text-center" *ngIf="showAnotherCheck">
@@ -165,6 +169,7 @@
               (click)="Delete(item)"
             ></i>
             <i
+              [hidden]="item[action.condition] === false"
               title="{{ action.title | translate }}"
               [class]="action.icon"
               class="text-20 font-weight-bold customAction"
@@ -192,24 +197,21 @@
 
     <!--end::Page Number-->
   </div>
-  <div class="col-10">
-    <ul class="pagination">
-      <li
+  <div class="col-10 text-center" *ngIf="pagination.totalPages > 1">
+    <ul class="pagination" style="display: inline-flex">
+      <!-- <li
         class="page-item previous disabled"
         (click)="sendPageNumber(active - 1)"
-        *ngIf="pagination.NumberOfPages > 1 && active > 1"
+        *ngIf="pagination.totalPages > 1 && active > 1"
       >
         <span class="page-link text-dark font-weight-bolder">
           {{ "global.previous" | translate }}
         </span>
-      </li>
+      </li> -->
       <li
         class="page-item"
         [ngClass]="{ active: item + 1 == active }"
-        *ngFor="
-          let item of pagination.NumberOfPages | demoNumber;
-          let i = index
-        "
+        *ngFor="let item of pagination.totalPages | demoNumber; let i = index"
         (click)="sendPageNumber(item + 1)"
       >
         <a class="page-link">

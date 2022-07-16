@@ -7,17 +7,17 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Pagination } from '../../models';
-import { SwalModalService } from '../../services/swal-modal.service';
+} from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Pagination } from "../../models";
+import { SwalModalService } from "../../services/swal-modal.service";
 // import { Pagination } from '../..';
 // import { ExcelService } from '../../services/excel.service';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit {
@@ -37,17 +37,22 @@ export class TableComponent implements OnInit {
   @Output() delete = new EventEmitter<any>();
 
   @Input() addActions: boolean = false;
-  @Input() actionList: { title: string; icon: string; type?: string }[] = [];
+  @Input() actionList: {
+    title: string;
+    icon: string;
+    type?: string;
+    condition?: string;
+  }[] = [];
   @Output() aciton: EventEmitter<any> = new EventEmitter<any>();
   @Output() changeActivation: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() showAnotherCheck: boolean = false;
-  @Input() AnotherCheckPropName: string = '';
-  @Input() AnotherCheckTitelName: string = '';
+  @Input() AnotherCheckPropName: string = "";
+  @Input() AnotherCheckTitelName: string = "";
   @Output() changeAnotherCheck: EventEmitter<any> = new EventEmitter<any>();
   @Output() resetFilter: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() rowsNumber: Number[] = [10, 20, 30, 40, 50,60,70,80,90,100];
+  @Input() rowsNumber: Number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   pageSize: number = 10;
   @Output() activetedPageSize = new EventEmitter<number>();
   @Output() activetedPageNumber = new EventEmitter<number>();
@@ -58,32 +63,26 @@ export class TableComponent implements OnInit {
   @Input() isdownloadAll: boolean = false;
   @Output() export = new EventEmitter<number>();
 
-
-
-  @Input() create: string = '';
-
-
+  @Input() create: string = "";
 
   active: number = 1;
   form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private swalService: SwalModalService,
-
-    // private excelService:ExcelService
-    ) {
+    private swalService: SwalModalService // private excelService:ExcelService
+  ) {
     this.form = this.formBuilder.group({
-      search: ['', [Validators.required]],
+      search: ["", [Validators.required]],
     });
   }
   ngOnInit(): void {}
 
   searchValue(): void {
-    this.search.emit(this.form.get('search').value);
+    this.search.emit(this.form.get("search").value);
   }
   reset(): void {
     this.form.reset();
-    this.resetFilter.emit('');
+    this.resetFilter.emit("");
   }
   View(item: any): void {
     this.view.emit(item);
@@ -117,16 +116,16 @@ export class TableComponent implements OnInit {
   pageSizeChanged(event: string) {
     // console.log(+event.split(': ')[1]);
     // console.log(this.pageSize);
-    this.pageSize = Number(+event.split(': ')[1]);
-    this.activetedPageSize.emit(+event.split(': ')[1]);
+    this.pageSize = Number(+event.split(": ")[1]);
+    this.activetedPageSize.emit(+event.split(": ")[1]);
   }
   sendPageNumber(pageNumber: number) {
     this.active = pageNumber;
     this.activetedPageNumber.emit(pageNumber);
   }
 
-  downloadAsExcelFile(){
-    if(!this.list.length) return;
+  downloadAsExcelFile() {
+    if (!this.list.length) return;
     // this.excelService.exportAsExcelFile(this.list, 'data_file');
   }
   downloadAllData(): void {

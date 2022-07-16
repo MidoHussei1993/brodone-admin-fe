@@ -67,7 +67,7 @@ export class PrinterListComponent implements OnInit {
 
   getPrintHouseList() {
     this.spinner.show();
-    this.printHouseService.get().subscribe(
+    this.printHouseService.get(this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
         this.PrintHouseList = res.responsePayload.content;

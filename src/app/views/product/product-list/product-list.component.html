@@ -1,40 +1,40 @@
-<div class=" mb-4">
-    <div class="breadcrumb">
-      <h1 class="">{{ "Products" | translate }}</h1>
-      <ul>
-        <li>
-          <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
-        </li>
-        <li>{{ "Products" | translate }}</li>
-      </ul>
-    </div>
-  
-    <!-- <div class="card bg-dark my-3 shadow">
+<div class="mb-4">
+  <div class="breadcrumb">
+    <h1 class="">{{ "Products" | translate }}</h1>
+    <ul>
+      <li>
+        <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+      </li>
+      <li>{{ "Products" | translate }}</li>
+    </ul>
+  </div>
+
+  <!-- <div class="card bg-dark my-3 shadow">
       <div class="card-body ">
         <app-filter [filter]="filter"></app-filter>
       </div>
     </div> -->
-    <app-table
-      [list]="productList"
-      [titles]="titles"
-      [properties]="properties"
-      [create]="'/product/create'"
-      [pagination]="pagination"
-      (activetedPageSize)="setPageSize($event)"
-      (activetedPageNumber)="setPageNumber($event)"
-      (delete)="deleteproduct($event)"
-      [showSearch]="false"
-      [showEdit]="true"
-      [showView]="true"
-      [showDelete]="true"
-      (view)="navigateToView($event)"
-      (edit)="navigateToEdit($event)"
-      (search)="searchValue()"
-      (resetFilter)="resetfilter()"
-      ></app-table>
-    </div>
-    
-    <!-- [addActions]="true"
+  <app-table
+    [list]="productList"
+    [titles]="titles"
+    [properties]="properties"
+    [create]="'/product/create'"
+    [pagination]="pagination"
+    (activetedPageSize)="setPageSize($event)"
+    (activetedPageNumber)="setPageNumber($event)"
+    (delete)="deleteproduct($event)"
+    [showSearch]="false"
+    [showEdit]="true"
+    [showView]="true"
+    [showDelete]="true"
+    (view)="navigateToView($event)"
+    (edit)="navigateToEdit($event)"
+    (search)="searchValue()"
+    (resetFilter)="resetfilter()"
+  ></app-table>
+</div>
+
+<!-- [addActions]="true"
     [actionList]="[
       {
         title: 'assign',
@@ -49,5 +49,3 @@
       { title: 'withdraw', icon: 'i-Close-Window', type: 'withdraw' }
     ]"
     (aciton)="navigateTO($event)" -->
-  
-  

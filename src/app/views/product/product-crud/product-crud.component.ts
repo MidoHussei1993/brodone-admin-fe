@@ -41,9 +41,9 @@ export class ProductCrudComponent implements OnInit {
   sizeList: { id: number; sizeCode: string; selected: boolean }[] = [];
   categoryList: any[] = [];
   mainObject: any = {};
-  imageObject: { image: any; id: number; order: number } = {
+  imageObject: { file: any; id: number; order: number } = {
     id: null,
-    image: null,
+    file: null,
     order: null,
   };
 
@@ -62,8 +62,8 @@ export class ProductCrudComponent implements OnInit {
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],
       categoryId: ["", [Validators.required]],
-      imageOverlayCost: ["", [Validators.required]],
-      imageOverlayEnabled: ["", [Validators.required]],
+      imageOverlayCost: [0],
+      imageOverlayEnabled: [""],
       pricingList: new FormArray([], [Validators.required]),
     });
 
@@ -203,7 +203,7 @@ export class ProductCrudComponent implements OnInit {
   }
 
   handleInputChange(event, prop: string) {
-    this.imageObject.image = event.target.files[0];
+    this.imageObject.file = event.target.files[0];
   }
   uploadProductImage() {
     this.spinner.show();
@@ -211,6 +211,8 @@ export class ProductCrudComponent implements OnInit {
       (result) => {
         this.spinner.hide();
         this.notifier.notify("success", this.translate.instant("done"));
+        this.modalService.dismissAll();
+        this.getProductById(this.route.snapshot.params.id);
       },
       (err) => {
         this.spinner.hide();

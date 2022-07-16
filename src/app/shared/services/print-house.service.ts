@@ -26,8 +26,19 @@ export class PrintHouseService {
     });
   }
 
-  get(): Observable<any> {
-    return this.httpClient.get(API.get);
+  get(filter: any = {}): Observable<any> {
+    return this.httpClient.get(API.get, {
+      params: {
+        ...(filter.page && { page: filter.page }),
+        ...(filter.size && { size: filter.size }),
+        // ...(filter.fromDate && { fromDate: filter.fromDate }),
+        // ...(filter.toDate && { toDate: filter.toDate }),
+        ...(filter.printerId && { printerId: filter.printerId }),
+        ...(filter.customerId && { customerId: filter.customerId }),
+        ...(filter.orderId && { orderId: filter.orderId }),
+        ...(filter.username && { username: filter.username }),
+      },
+    });
   }
   create(body: any): Observable<any> {
     return this.httpClient.post(API.add, body);

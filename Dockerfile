@@ -1,6 +1,6 @@
 
 # Use official node image as the base image
-FROM node:12 as build
+FROM node:14.18.1 as build
 
 # Set the working directory
 RUN rm -rf /usr/local/app/dist
@@ -11,6 +11,7 @@ COPY ./ /usr/local/app/
 
 # Set the working directory
 WORKDIR /usr/local/app
+
 
 # Install all the dependencies
 RUN npm cache clean --force

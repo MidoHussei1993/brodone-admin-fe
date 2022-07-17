@@ -1,4 +1,3 @@
-
 # Use official node image as the base image
 FROM node:14.18.1 as build
 

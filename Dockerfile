@@ -4,6 +4,7 @@ FROM node:12 as build
 
 # Set the working directory
 RUN rm -rf /usr/local/app/dist
+RUN rm -rf /usr/share/nginx/html
 
 # Add the source code to app
 COPY ./ /usr/local/app/

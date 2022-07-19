@@ -23,7 +23,7 @@ export class CategoryService {
   getAll(filter: CategoryFilter): Observable<any> {
     return this.httpClient.get(API.getAll, {
       params: {
-        ...(filter.page && { page: filter.page - 1 }),
+        ...(filter.page && { page: filter.page }),
         ...(filter.size && { size: filter.size }),
         // ...(filter.id && { id: filter.id }),
         // ...(filter.sort && { sort: filter.sort }),

@@ -25,6 +25,7 @@ export class PrinterCrudComponent implements OnInit {
   formSubmited;
   cityList: any[] = [];
   rigionList: any[] = [];
+  regionId: number = null;
 
   constructor(
     private router: Router,
@@ -91,6 +92,8 @@ export class PrinterCrudComponent implements OnInit {
         this.spinner.hide();
         this.busyLoading = false;
         this.form.patchValue(res.responsePayload);
+        this.regionId = res.responsePayload.regionId;
+        this.getRegionCities(this.regionId);
       },
       (err) => {
         this.spinner.hide();

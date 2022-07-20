@@ -43,7 +43,6 @@ export class PrinterCrudComponent implements OnInit {
       lastName: ["", [Validators.required]],
       email: ["", [Validators.required]],
       cityId: ["", [Validators.required]],
-
       businessClassification: ["", [Validators.required]],
       photoUrl: [""],
       compnayName: ["", [Validators.required]],

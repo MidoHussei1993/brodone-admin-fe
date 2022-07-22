@@ -61,7 +61,9 @@ export class RecievedMessageComponent implements OnInit {
     this.msgService.getAllReceived(this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
-        this.messageList = res.content;
+        res.content.map(item => this.messageList.push(item))
+        delete res.content;
+        this.pagination = res;
       },
       (err) => {
         this.spinner.hide();

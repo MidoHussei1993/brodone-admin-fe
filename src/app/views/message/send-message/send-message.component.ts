@@ -61,7 +61,9 @@ export class SendMessageComponent implements OnInit {
     this.msgService.getAllSent(this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
-        this.messageList = res.content;
+        res.content.map(item => this.messageList.push(item))
+        delete res.content;
+        this.pagination = res;
       },
       (err) => {
         this.spinner.hide();

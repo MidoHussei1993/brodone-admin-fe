@@ -23,7 +23,7 @@ export class MsgService {
   getAll(filter: MessageFilter): Observable<any> {
     return this.httpClient.get(API.getAll, {
       params: {
-        ...(filter.page && { page: filter.page - 1 }),
+        ...(filter.page && { page: filter.page }),
         ...(filter.size && { size: filter.size }),
         ...(filter.id && { id: filter.id }),
         ...(filter.sort && { sort: filter.sort }),
@@ -34,7 +34,7 @@ export class MsgService {
   getAllReceived(filter: MessageFilter): Observable<any> {
     return this.httpClient.get(API.getAllReceived, {
       params: {
-        ...(filter.page && { page: filter.page - 1 }),
+        ...(filter.page && { page: filter.page }),
         ...(filter.size && { size: filter.size }),
         ...(filter.id && { id: filter.id }),
         ...(filter.sort && { sort: filter.sort }),
@@ -45,7 +45,7 @@ export class MsgService {
   getAllSent(filter: MessageFilter): Observable<any> {
     return this.httpClient.get(API.getAllSent, {
       params: {
-        ...(filter.page && { page: filter.page - 1 }),
+        ...(filter.page && { page: filter.page }),
         ...(filter.size && { size: filter.size }),
         ...(filter.id && { id: filter.id }),
         ...(filter.sort && { sort: filter.sort }),

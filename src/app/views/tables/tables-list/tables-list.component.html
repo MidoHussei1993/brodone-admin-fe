@@ -1,0 +1,36 @@
+<div class="mb-4">
+    <div class="breadcrumb">
+      <h1 class="">{{ "tables" | translate }}</h1>
+      <ul>
+        <li>
+          <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+        </li>
+        <li>{{ "tables" | translate }}</li>
+      </ul>
+    </div>
+  
+    <!-- <div class="card bg-dark my-3 shadow">
+        <div class="card-body ">
+          <app-filter [filter]="filter"></app-filter>
+        </div>
+      </div> -->
+    <app-table
+      [list]="list"
+      [titles]="titles"
+      [properties]="properties"
+      [create]="'/tables/'+currentId+'/create'"
+      [pagination]="pagination"
+      (activetedPageSize)="setPagelimit($event)"
+      (activetedPageNumber)="setPageNumber($event)"
+      (delete)="deleteItem($event)"
+      [showSearch]="false"
+      [showEdit]="true"
+      [showView]="true"
+      [showDelete]="true"
+      (view)="navigateToView($event)"
+      (edit)="navigateToEdit($event)"
+      (search)="searchValue()"
+      (resetFilter)="resetfilter()"
+    ></app-table>
+  </div>
+  

@@ -31,8 +31,8 @@
     <div [ngClass]="{open: navService.sidebarState.childnavOpen}" class="sidebar-left-secondary rtl-ps-none" perfectScrollbar>
         <i class="sidebar-close i-Close" (click)="toggelSidebar()"></i>
         <header>
-            <div class="logo">
-                <img src="./assets/images/logo.svg" alt="">
+            <div class="logo text-center">
+                <img src="./assets/images/logo.png" class="" alt="">
             </div>            
             <h6>{{selectedItem?.name}}</h6>
             <p>{{selectedItem?.description}}</p>
@@ -41,12 +41,12 @@
     </div>
     
     <ng-template #menuTemplate let-parentItem="parentItem">
-      <ul class="childNav" appDropdown>
+      <ul class="childNav " appDropdown>
         <li *ngFor="let item of parentItem?.sub" appDropdownLink class="nav-item">
     
           <a routerLink="{{item.state}}" *ngIf="item.type === 'link'" class="" [ngClass]="{open: item.active}" routerLinkActive="open">
             <i *ngIf="item.icon" [class]="'nav-icon '+ item.icon "></i>
-            <span class="item-name lvl1">{{item?.name}}</span>
+            <span class="item-name lvl1 lead">{{item?.name}}</span>
           </a>
     
           <div *ngIf="item.type === 'dropDown'">

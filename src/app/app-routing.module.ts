@@ -15,70 +15,70 @@ const adminRoutes: Routes = [
       ),
   },
   {
-    path: "order",
+    path: "tags",
     loadChildren: () =>
-      import("./views/orders/orders.module").then((m) => m.OrdersModule),
+      import("./views/tags/tags.module").then((m) => m.TagsModule),
   },
   {
-    path: "message",
+    path: "employee-branches/:restaurantId",
     loadChildren: () =>
-      import("./views/message/message.module").then((m) => m.MessageModule),
+      import("./views/employee-branches/employee-branches.module").then((m) => m.EmployeeBranchesModule),
   },
   {
-    path: "category",
+    path: "employee-roles/:restaurantId",
+    loadChildren: () =>
+      import("./views/employee-roles/employee-roles.module").then((m) => m.EmployeeRolesModule),
+  },
+  {
+    path: "restaurant",
+    loadChildren: () =>
+      import("./views/restaurant/restaurant.module").then((m) => m.RestaurantModule),
+  },
+  {
+    path: "resources",
+    loadChildren: () =>
+      import("./views/resources/resources.module").then((m) => m.ResourcesModule),
+  },
+  {
+    path: "category/:restaurantId",
     loadChildren: () =>
       import("./views/category/category.module").then((m) => m.CategoryModule),
   },
   {
-    path: "product",
+    path: "restaurant-employee/:restaurantId",
     loadChildren: () =>
-      import("./views/product/product.module").then((m) => m.ProductModule),
+      import("./views/restaurant-employee/restaurant-employee.module").then((m) => m.RestaurantEmployeeModule),
   },
   {
-    path: "print-house",
+    path: "attributes/:restaurantId",
     loadChildren: () =>
-      import("./views/printer/printer.module").then((m) => m.PrinterModule),
+      import("./views/attributes/attributes.module").then((m) => m.AttributesModule),
   },
-  // {
-  //   path: 'uikits',
-  //   loadChildren: () => import('./views/ui-kits/ui-kits.module').then(m => m.UiKitsModule)
-  // },
-  // {
-  //   path: 'forms',
-  //   loadChildren: () => import('./views/forms/forms.module').then(m => m.AppFormsModule)
-  // },
-  // {
-  //   path: 'invoice',
-  //   loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
-  // },
-  // {
-  //   path: 'inbox',
-  //   loadChildren: () => import('./views/inbox/inbox.module').then(m => m.InboxModule)
-  // },
-  // {
-  //   path: 'calendar',
-  //   loadChildren: () => import('./views/calendar/calendar.module').then(m => m.CalendarAppModule)
-  // },
-  // {
-  //   path: 'chat',
-  //   loadChildren: () => import('./views/chat/chat.module').then(m => m.ChatModule)
-  // },
-  // {
-  //   path: 'contacts',
-  //   loadChildren: () => import('./views/contacts/contacts.module').then(m => m.ContactsModule)
-  // },
-  // {
-  //   path: 'tables',
-  //   loadChildren: () => import('./views/data-tables/data-tables.module').then(m => m.DataTablesModule)
-  // },
-  // {
-  //   path: 'pages',
-  //   loadChildren: () => import('./views/pages/pages.module').then(m => m.PagesModule)
-  // },
-  // {
-  //     path: 'icons',
-  //     loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-  // }
+  {
+    path: "tables/:restaurantId",
+    loadChildren: () =>
+      import("./views/tables/tables.module").then((m) => m.TablesModule),
+  },
+  {
+    path: "permissions/:restaurantId",
+    loadChildren: () =>
+      import("./views/permissions/permissions.module").then((m) => m.PermissionsModule),
+  },
+  {
+    path: "menus/:restaurantId",
+    loadChildren: () =>
+      import("./views/menus/menus.module").then((m) => m.MenusModule),
+  },
+  {
+    path: "menus-items/:restaurantId",
+    loadChildren: () =>
+      import("./views/menus-items/menus-items.module").then((m) => m.MenusItemsModule),
+  },
+  {
+    path: "attributes/:restaurantId",
+    loadChildren: () =>
+      import("./views/attributes/attributes.module").then((m) => m.AttributesModule),
+  },
 ];
 
 const routes: Routes = [

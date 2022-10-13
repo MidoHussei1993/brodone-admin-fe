@@ -1,93 +1,210 @@
 import { environment } from "src/environments/environment";
 
-export const BaseURL: string = environment.apiURL;
+export const BaseURL: string = environment.apiURL + "dashboard";
 
-export const FasterAPI = BaseURL + "/api";
-
-class services {
-  public static mkt = `${BaseURL}mkt/api/v1/`;
-  public static usr = `${BaseURL}usr/api/v1/`;
-  public static usrApi = `${BaseURL}usr/`;
-  public static uaa = `${BaseURL}uaa/`;
-  public static pay = `${BaseURL}pay/v1/api/`;
-}
+export const brodoneUrl = environment.apiURL;
 
 export class END_POINTS {
-  // faster login
-
   public static AUTH = {
-    login: services.uaa + "oauth/login",
-    register: services.uaa + "customer/register",
-    otp: services.uaa + "customer/otp",
-    LOGOUT: services.uaa + "oauth/logout",
+    login: environment.apiURL + "admins/login",
   };
 
-  public static orders = {
-    get: services.mkt + "admin/dashboard/allOrders",
-    myOrder: services.mkt + "admin/dashboard/myOrders",
-    assign: services.mkt + "admin/dashboard/assign",
-    printhouse: services.mkt + "admin/dashboard/printhouse",
-    revoke: (printingHouse: number, order: number): string =>
-      services.mkt + `admin/dashboard/revoke/${printingHouse}/${order}`,
-    withdraw: (order: number): string =>
-      services.mkt + `admin/dashboard/reject/${order}`,
-    getOrderStatus: services.mkt + "admin/dashboard/status",
-    updateOrderStatus: services.mkt + "admin/dashboard/update",
-    pickOrder: services.mkt + "admin/dashboard/pick",
+  public static tags = {
+    add: BaseURL + "/tags",
+    getAll: BaseURL + "/tags",
+    getById: (productId: number): string => BaseURL + "/tags/" + productId,
+    update: (id: number): string => BaseURL + "/tags/" + id,
+    delete: (id: number): string => BaseURL + "/tags/" + id,
   };
-  public static printhouse = {
-    printhouse: services.mkt + "admin/dashboard/printhouse",
-    get: services.usrApi + "v1/admin/printing/all/pages",
-    add: services.usrApi + "v1/admin/printing",
-    edit: services.usrApi + "v1/admin/printing",
-    getById: (categoryId: number): string =>
-      services.usrApi + "v1/admin/printing/" + categoryId,
-    cityDropdown: services.mkt + "city/region",
-    getRegionCities: (regionId: number): string =>
-      services.mkt + `city/region/${regionId}/city`,
+  public static restaurants = {
+    add: BaseURL + "/restaurants",
+    getAll: BaseURL + "/restaurants",
+    getById: (restaurantId: number): string =>
+      BaseURL + "/restaurants/" + restaurantId,
+    update: (id: number): string => BaseURL + "/restaurants/" + id,
+    delete: (id: number): string => BaseURL + "/restaurants/" + id,
   };
-
-  public static message = {
-    sent: services.mkt + "message",
-    reply: services.mkt + "message/reply",
-    view: (id: number) => services.mkt + `message/view/${id}`,
-    delete: (id: number) => services.mkt + `message/${id}`,
-    getAll: services.mkt + "message/view/all",
-    getAllSent: services.mkt + "message/view/sent",
-    getAllReceived: services.mkt + "message/view/recieve",
-    getCountOfUnRead: services.mkt + "message/count",
+  public static EmployeesRoles = {
+    add: (restaurantId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/employee-roles`,
+    getAll: (restaurantId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/employee-roles`,
+    getById: (restaurantId: string, roleId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/employee-roles/${roleId}`,
+    update: (restaurantId: string, roleId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/employee-roles/${roleId}`,
+    delete: (restaurantId: string, roleId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/employee-roles/${roleId}`,
   };
-
-  public static users = {
-    getUsers: services.mkt + "admin/dashboard/users",
-  };
-
-  public static category = {
-    getById: (categoryId: number): string =>
-      services.mkt + "category/" + categoryId,
-    delete: (categoryId: number): string =>
-      services.mkt + "admin/category/" + categoryId,
-    addEditcategory: services.mkt + "admin/category",
-    getAll: services.mkt + "category/all/pages",
-    dropDown: services.mkt + "category/all",
-    getCategoryImage: (categoryId: number): string =>
-      services.mkt + "images/category/" + categoryId,
-    getCategoryCanvas: (categoryId: number): string =>
-      services.mkt + "images/canvas/" + categoryId,
-    uploadCategoryImage: services.mkt + "images/category",
-    uploadCategoryCanvas: services.mkt + "images/canvas",
+  public static restaurantBranches = {
+    add: (restaurantId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/branches`,
+    getAll: (restaurantId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/branches`,
+    getById: (restaurantId: string, branchId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/branches/${branchId}`,
+    update: (restaurantId: string, branchId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/branches/${branchId}`,
+    delete: (restaurantId: string, branchId: string): string =>
+      `${BaseURL}/restaurants/${restaurantId}/branches/${branchId}`,
   };
 
-  public static product = {
-    delete: (productId: number): string =>
-      services.mkt + "admin/product/" + productId,
-    getColors: services.mkt + "admin/product/colors",
-    add: services.mkt + "admin/product",
-    edit: services.mkt + "admin/product",
-    getSizes: services.mkt + "admin/product/sizes",
-    getAll: services.mkt + "product/all/pages",
-    uploadImage: services.mkt + "images/product",
-    getById: (productId: number): string =>
-      services.mkt + "product?id=" + productId,
+  public static categories = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/categories`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/categories`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/categories/` + id,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/categories/` + id,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/categories/` + id,
+    getCategoriesItems: (id: number): string =>
+      BaseURL + "/categories/" + id + "/items",
   };
+
+  public static restaurantsEmployees = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/employees`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/employees`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/employees/${id}`,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/employees/${id}`,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/employees/${id}`,
+  };
+
+  public static menus = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menus`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menus`,
+    update: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menus`,
+    delete: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menus `,
+  };
+
+  public static menusItems = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menu-items`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menu-items`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menu-items/${id}`,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menu-items/${id}`,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/menu-items/${id}`,
+  };
+
+  public static menusItemsVariations = {
+    add: (restaurantId: number, menuItemId: number): string =>
+      BaseURL +
+      `/restaurants/${restaurantId}/menu-items/${menuItemId}/variations`,
+    getAll: (restaurantId: number, menuItemId: number): string =>
+      BaseURL +
+      `/restaurants/${restaurantId}/menu-items/${menuItemId}/variations`,
+    getById: (restaurantId: number, menuItemId: number, id: number): string =>
+      BaseURL +
+      `/restaurants/${restaurantId}/menu-items/${menuItemId}/variations/${id}`,
+    update: (restaurantId: number, menuItemId: number, id: number): string =>
+      BaseURL +
+      `/restaurants/${restaurantId}/menu-items/${menuItemId}/variations/${id}`,
+    delete: (restaurantId: number, menuItemId: number, id: number): string =>
+      BaseURL +
+      `/restaurants/${restaurantId}/menu-items/${menuItemId}/variations${id}`,
+  };
+
+  public static permissions = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/permissions`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/permissions`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/permissions/` + id,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/permissions/` + id,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/permissions/` + id,
+    getCategoriesItems: (id: number): string =>
+      BaseURL + "/permissions/" + id + "/items",
+  };
+  public static tables = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/tables`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/tables`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/tables/` + id,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/tables/` + id,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/tables/` + id,
+    getCategoriesItems: (id: number): string =>
+      BaseURL + "/tables/" + id + "/items",
+  };
+
+  public static attributes = {
+    add: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/attributes`,
+    getAll: (restaurantId: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/attributes`,
+    getById: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/attributes/` + id,
+    update: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/attributes/` + id,
+    delete: (restaurantId: number, id: number): string =>
+      BaseURL + `/restaurants/${restaurantId}/attributes/` + id,
+    getCategoriesItems: (id: number): string =>
+      BaseURL + "/attributes/" + id + "/items",
+  };
+
+  public static resources = {
+    add: brodoneUrl + "resources",
+    getAll: brodoneUrl + "resources",
+    getById: (restaurantId: number): string =>
+      brodoneUrl + "resources/" + restaurantId,
+    update: (id: number): string => brodoneUrl + "resources/" + id,
+    delete: (id: number): string => brodoneUrl + "resources/" + id,
+  };
+
+  public static attributeValues = {
+    add: (restaurantId: string, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
+    getAll: (restaurantId: string, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
+    getById: (restaurantId: string, attributeId: any, id: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
+    update: (restaurantId: string, attributeId: any, id: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
+  };
+
+  public static variations = {
+    add: (restaurantId: string, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations`,
+    getAll: (restaurantId: string, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations`,
+    getById: (restaurantId: string, attributeId: any, id: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations/${id}`,
+    update: (restaurantId: string, attributeId: any, id: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations/${id}`,
+    delete: (restaurantId: string, attributeId: any, id: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations/${id}`,
+  };
+
+  public static attributesValues = {
+    add: (restaurantId: number, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
+    getAll: (restaurantId: number, attributeId: any): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
+    getById: (restaurantId: number, attributeId: any, id: number): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
+    update: (restaurantId: number, attributeId: any, id: number): string =>
+      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
+  };
+
 }

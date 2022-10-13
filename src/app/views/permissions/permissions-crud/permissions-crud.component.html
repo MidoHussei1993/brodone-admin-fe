@@ -1,0 +1,89 @@
+<div class="card card-flush shadow-sm">
+    <div class="card-header">
+      <h3 class="card-title">
+        <span> {{ mode | translate }} - </span>
+        <span class="mx-2"> {{ "permissions" | translate }} </span>
+      </h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+  
+  
+        <div class="row mt-3">
+            <div class="col-md-6 col-sm-12">
+                <div class="card border h-100">
+                  <div class="card-header">
+                    <h5>
+                      {{ "aciton" | translate }}
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div
+                        class="col-md-4 col-sm-6"
+                        *ngFor="let item of actionList; let i = index"
+                      >
+                        <label class="checkbox checkbox-info">
+                          <input
+                            checked=""
+                            [ngModelOptions]="{standalone: true}"
+                            [value]="item.name"
+                            [(ngModel)]="item.selected"
+                            type="checkbox"
+                          />
+                          <span> {{ item.name }} </span
+                          ><span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="picker1">
+                  {{ "role" | translate }}
+                </label>
+                <select
+                  formControlName="roleId"
+                  class="form-control form-control-rounded"
+                >
+                  <option
+                    *ngFor="let item of roleList; let i = index"
+                    [ngValue]="+item.id"
+                  >
+                  {{item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    !form.get('roleId').valid &&
+                    (form.get('roleId').dirty || form.get('roleId').touched)
+                  "
+                  class="text text-danger"
+                >
+                  <p *ngIf="form.get('roleId').hasError('required')">
+                    {{ "required" | translate }}
+                  </p>
+                </div>
+              </div>
+          </div>
+
+          <div class="d-flex justify-content-center my-5">
+        <div class="p-2" *ngIf="mode != 'View'">
+          <button
+            type="submit"
+            class="btn btn-info btn-block btn-hover-scale px-5"
+          >
+            {{ "save" | translate }}
+          </button>
+        </div>
+
+      
+      </div>
+      
+      </form>
+  
+   
+    </div>
+  </div>
+  

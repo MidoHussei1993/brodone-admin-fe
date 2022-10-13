@@ -1,0 +1,48 @@
+<div class="mb-4">
+    <div class="breadcrumb">
+      <h1 class="">{{ "restaurant" | translate }}</h1>
+      <ul>
+        <li>
+          <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+        </li>
+        <li>{{ "restaurant" | translate }}</li>
+      </ul>
+    </div>
+  
+    <!-- <div class="card bg-dark my-3 shadow">
+        <div class="card-body ">
+          <app-filter [filter]="filter"></app-filter>
+        </div>
+      </div> -->
+    <app-table
+      [list]="restaurantList"
+      [titles]="titles"
+      [properties]="properties"
+      [create]="'/restaurant/create'"
+      [pagination]="pagination"
+      (activetedPageSize)="setPagelimit($event)"
+      (activetedPageNumber)="setPageNumber($event)"
+      (delete)="deleteRestaurant($event)"
+      [showSearch]="false"
+      [showEdit]="true"
+      [showView]="true"
+      [showDelete]="true"
+      (view)="navigateToView($event)"
+      (edit)="navigateToEdit($event)"
+      (search)="searchValue()"
+      (resetFilter)="resetfilter()"
+      [addActions]="true"
+      (aciton)="navigateTO($event)"
+      [actionList]="[
+        {title:'category',icon:'i-Flag-2',type:'category'},
+        {title:'employeeRoles',icon:'i-Financial',type:'employeeRoles'},
+        {title:'employeeBranches',icon:'i-Duplicate-Window',type:'employeeBranches'},
+        {title:'restaurantEmployee',icon:'i-Administrator',type:'restaurantEmployee'},
+        {title:'tables',icon:'i-Posterous ',type:'tables'},
+        {title:'permissions',icon:'i-Lock-User ',type:'permissions'},
+        {title:'menus',icon:'i-Receipt-4 ',type:'menus'},
+        {title:'menusItems',icon:'i-Receipt-3 ',type:'menusItems'},
+        ]"
+        ></app-table>
+      </div>
+   

@@ -14,10 +14,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DemoNumberPipe } from './pipes';
 import { FilterComponent } from './components/filter/filter.component';
+import { GoogleMapComponent } from './components/google-map/google-map.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const Component = [
   TableComponent,
-  FilterComponent
+  FilterComponent,
+  GoogleMapComponent
 ]
 const Pipes = [
   DemoNumberPipe
@@ -41,7 +44,8 @@ const Pipes = [
     TranslateModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule
   ],
   exports: [
     RouterModule,

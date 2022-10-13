@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+input.ng-dirty.ng-invalid {
+    border: 1px solid red;
+    color: red;
+  }
+  

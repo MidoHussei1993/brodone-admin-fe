@@ -15,7 +15,7 @@ export class PrintHouseService {
     return this.httpClient.get(API.printhouse, {
       params: {
         ...(filter.page && { page: filter.page }),
-        ...(filter.size && { size: filter.size }),
+        ...(filter.limit && { limit: filter.limit }),
         // ...(filter.fromDate && { fromDate: filter.fromDate }),
         // ...(filter.toDate && { toDate: filter.toDate }),
         ...(filter.printerId && { printerId: filter.printerId }),
@@ -30,7 +30,7 @@ export class PrintHouseService {
     return this.httpClient.get(API.get, {
       params: {
         ...(filter.page && { page: filter.page }),
-        ...(filter.size && { size: filter.size }),
+        ...(filter.limit && { limit: filter.limit }),
         // ...(filter.fromDate && { fromDate: filter.fromDate }),
         // ...(filter.toDate && { toDate: filter.toDate }),
         ...(filter.printerId && { printerId: filter.printerId }),

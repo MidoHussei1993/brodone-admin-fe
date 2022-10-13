@@ -21,17 +21,7 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   // login
-  login(model: LoginModel): Observable<any> {
-    const formData = new FormData();
-    for (const [key, value] of Object.entries(model)) {
-      formData.append(`${key}`, String(value));
-    }
-    return this.http
-      .post(API.login, formData, {
-        headers: new HttpHeaders().set(
-          "Authorization",
-          "Basic VGFiYUBTZXJ2aWNlczIwMjJDbGllbnQ6VGFiYSRlY3JpdEtleQ=="
-        ),
-      })
+  login(model: any): Observable<any> {
+    return this.http.post(API.login, model);
   }
 }

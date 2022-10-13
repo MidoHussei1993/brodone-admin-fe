@@ -19,6 +19,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ErrorInterceptor } from "./core/Http/interceptors/error.interceptor";
 import { AppHttpInterceptor } from "./core/Http/interceptors/message.interceptor";
+import { GoogleMapsModule } from '@angular/google-maps';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { FormsModule } from "@angular/forms";
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
 }
@@ -43,14 +46,17 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
     NotifierModule,
+    GoogleMapsModule,
+    AngularMultiSelectModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppHttpInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AppHttpInterceptor,
+    //   multi: true,
+    // },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

@@ -24,25 +24,19 @@ export class SidebarCompactComponent implements OnInit {
     this.updateSidebar();
     // CLOSE SIDENAV ON ROUTE CHANGE
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((routeChange) => {
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(routeChange => {
         this.closeChildNav();
         if (Utils.isMobile()) {
           this.navService.sidebarState.sidenavOpen = false;
         }
       });
-    let role: { id: number; authority: string }[] = JSON.parse(
-      localStorage.getItem("roles")
-    );
-    if (role.length) {
-      this.navService.menuItems$.subscribe((items) => {
-        this.nav = items.filter((item) =>
-          item.role.includes(role[0].authority)
-        );
-        console.log(this.nav);
-        this.setActiveFlag();
-      });
-    }
+
+    this.navService.menuItems$.subscribe(items => {
+      this.nav = items;
+      this.setActiveFlag();
+    });
+
   }
 
   selectItem(item) {

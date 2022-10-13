@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://service.taba.sa/',
+  apiURL: 'https://api.winpro-sa.com/',
 
 };
 

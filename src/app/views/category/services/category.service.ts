@@ -1,74 +1,38 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { END_POINTS } from "src/app/core/Http/globals/global-config";
-import { CategoryFilter } from "../models";
 
-const API = END_POINTS.category;
+const API = END_POINTS.categories;
 
 @Injectable({
   providedIn: "root",
 })
 export class CategoryService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  delete(id: number): Observable<any> {
-    return this.httpClient.delete(API.delete(id));
+  create(restaurantId: number, model): Observable<any> {
+    return this.http.post<any>(API.add(restaurantId), model);
   }
 
-  getById(id: number): Observable<any> {
-    return this.httpClient.get(API.getById(id));
-  }
-
-  getAll(filter: CategoryFilter): Observable<any> {
-    return this.httpClient.get(API.getAll, {
+  get(restaurantId: number, filter: any): Observable<any> {
+    return this.http.get<any>(API.getAll(restaurantId), {
       params: {
         ...(filter.page && { page: filter.page }),
-        ...(filter.size && { size: filter.size }),
-        // ...(filter.id && { id: filter.id }),
-        // ...(filter.sort && { sort: filter.sort }),
+        ...(filter.limit && { limit: filter.limit }),
       },
     });
   }
 
-  create(body: any): Observable<any> {
-    return this.httpClient.post(API.addEditcategory, body);
+  getById(restaurantId: number, id: number): Observable<any> {
+    return this.http.get<any>(API.getById(restaurantId, id));
   }
 
-  update(body: any): Observable<any> {
-    return this.httpClient.put(API.addEditcategory, body);
+  edit(restaurantId: number, id: number, model): Observable<any> {
+    return this.http.patch<any>(API.update(restaurantId, id), model);
   }
 
-  getDropdown(): Observable<any> {
-    return this.httpClient.get(API.dropDown);
-  }
-  getCategoryImage(id: number): Observable<any> {
-    return this.httpClient.get(API.getCategoryImage(id));
-  }
-  getCategoryCanvas(id: number): Observable<any> {
-    return this.httpClient.get(API.getCategoryCanvas(id));
-  }
-  uploadCategoryImage(body): Observable<any> {
-    let formData = new FormData();
-    let arr = [];
-    arr = [...Object.entries(body)];
-    console.table(arr);
-    arr.map((item) => {
-      formData.append(item[0], item[1]);
-    });
-    // return this.httpClient.post(API.uploadImage, formData, {
-    //   headers: new HttpHeaders().append("Content-Type", "multipart/form-data; boundary=<calculated when request is sent>"),
-    // });
-    return this.httpClient.post(API.uploadCategoryImage, formData);
-  }
-  uploadCategoryCanvas(body): Observable<any> {
-    let formData = new FormData();
-    let arr = [];
-    arr = [...Object.entries(body)];
-    console.table(arr);
-    arr.map((item) => {
-      formData.append(item[0], item[1]);
-    });
-    return this.httpClient.post(API.uploadCategoryCanvas, formData);
+  delete(restaurantId: number, id: number): Observable<boolean> {
+    return this.http.delete<boolean>(API.delete(restaurantId, id));
   }
 }

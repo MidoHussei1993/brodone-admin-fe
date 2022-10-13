@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject } from "rxjs";
 
 export interface IMenuItem {
@@ -47,7 +48,9 @@ export class NavigationService {
   };
   selectedItem: IMenuItem;
 
-  constructor() {}
+  constructor(
+    private translate: TranslateService,
+  ) {}
 
   defaultMenu: IMenuItem[] = [
     {
@@ -112,105 +115,95 @@ export class NavigationService {
     //     ]
     // },
     {
-      name: "المطابع",
-      description: "ادار حسابات المطابع",
+      name: this.translate.instant('tags'),
+      // description: "ادار حسابات المطابع",
       type: "dropDown",
       icon: "i-Computer-2",
       role: ["AUTH_ADMIN"],
       sub: [
         {
           icon: "i-Clock-3",
-          name: "القائمة",
-          state: "/print-house",
-          type: "link",
-        },
-      ],
-    },
-    {
-      name: "التصنيفات",
-      role: ["AUTH_ADMIN"],
-      description: "ادارة الاصناف الرئيسية والفئات.",
-      type: "dropDown",
-      icon: "i-Posterous",
-      sub: [
-        {
-          icon: "i-Clock-3",
-          name: "القائمة",
-          state: "/category",
-          type: "link",
-        },
-      ],
-    },
-    {
-      name: "المنتجات",
-      role: ["AUTH_ADMIN"],
-      description: "ادارة المنتجات",
-      type: "dropDown",
-      icon: "i-Car-Items",
-      sub: [
-        { icon: "i-Clock-3", name: "القائمة", state: "/product", type: "link" },
-      ],
-    },
-
-    {
-      name: "الرسائل",
-      role: ["AUTH_ADMIN", "AUTH_PRINTING_HOUSE"],
-      description: "رسائل العملاء",
-      type: "dropDown",
-      icon: "i-Mail-2",
-      sub: [
-        {
-          icon: "i-Clock-3",
-          name: "جميع الرسائل",
-          state: "/message",
-          type: "link",
-        },
-        {
-          icon: "i-Add-User",
-          name: "الرسائل المستلمة",
-          state: "/message/recieved",
-          type: "link",
-        },
-        {
-          icon: "i-Email",
-          name: "الرسائل المرسلة",
-          state: "/message/send",
-          type: "link",
-        },
-      ],
-    },
-    {
-      name: "الطلبات",
-      role: ["AUTH_ADMIN", "AUTH_PRINTING_HOUSE"],
-      description: "ادارة  وتوزيع الطلبات",
-      type: "dropDown",
-      icon: "i-Financial",
-      sub: [
-        { icon: "i-Clock-3", name: "القائمة", state: "/order", type: "link" },
-      ],
-    },
-    {
-      name: "التقارير",
-      role: ["AUTH_ADMIN"],
-      description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-      type: "dropDown",
-      icon: "i-Bar-Chart-2",
-      sub: [
-        {
-          icon: "i-Error-404-Window",
-          name: "Not found",
-          state: "/others/404",
+          name: this.translate.instant('list'),
+          state: "/tags",
           type: "link",
         },
       ],
     },
     // {
-    //     name: 'Doc',
-    //     type: 'extLink',
-    //     tooltip: 'Documentation',
-    //     icon: 'i-Safe-Box1',
-    //     state: 'gull-doc'
-    // }
+    //   name: this.translate.instant('employeeBranches'),
+    //   // description: "ادار حسابات المطابع",
+    //   type: "dropDown",
+    //   icon: "i-Posterous",
+    //   role: ["AUTH_ADMIN"],
+    //   sub: [
+    //     {
+    //       icon: "i-Clock-3",
+    //       name: this.translate.instant('list'),
+    //       state: "/employee-branches",
+    //       type: "link",
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: this.translate.instant('employeeRoles'),
+    // description: "ادار حسابات المطابع",
+    //   type: "dropDown",
+    //   icon: "i-Financial",
+    //   role: ["AUTH_ADMIN"],
+    //   sub: [
+    //     {
+    //       icon: "i-Clock-3",
+    //       name: this.translate.instant('list'),
+    //       state: "/employee-roles",
+    //       type: "link",
+    //     },
+    //   ],
+    // },
+    {
+      name: this.translate.instant('restaurant'),
+      // description: "ادار حسابات المطابع",
+      type: "dropDown",
+      icon: "i-Car-Items",
+      role: ["AUTH_ADMIN"],
+      sub: [
+        {
+          icon: "i-Clock-3",
+          name: this.translate.instant('list'),
+          state: "/restaurant",
+          type: "link",
+        },
+      ],
+    },
+    {
+      name: this.translate.instant('resources'),
+      // description: "ادار حسابات المطابع",
+      type: "dropDown",
+      icon: "i-Library",
+      role: ["AUTH_ADMIN"],
+      sub: [
+        {
+          icon: "i-Clock-3",
+          name: this.translate.instant('list'),
+          state: "/resources",
+          type: "link",
+        },
+      ],
+    },
+    // {
+    //   name: this.translate.instant('category'),
+    //   // description: "ادار حسابات المطابع",
+    //   type: "dropDown",
+    //   icon: "i-Data-Center",
+    //   role: ["AUTH_ADMIN"],
+    //   sub: [
+    //     {
+    //       icon: "i-Clock-3",
+    //       name: this.translate.instant('list'),
+    //       state: "/category",
+    //       type: "link",
+    //     },
+    //   ],
+    // },
   ];
 
   // sets iconMenu as default;
@@ -218,18 +211,4 @@ export class NavigationService {
   // navigation component has subscribed to this Observable
   menuItems$ = this.menuItems.asObservable();
 
-  // You can customize this method to supply different menu for
-  // different user type.
-  // publishNavigationChange(menuType: string) {
-  //   switch (userType) {
-  //     case 'admin':
-  //       this.menuItems.next(this.adminMenu);
-  //       break;
-  //     case 'user':
-  //       this.menuItems.next(this.userMenu);
-  //       break;
-  //     default:
-  //       this.menuItems.next(this.defaultMenu);
-  //   }
-  // }
 }

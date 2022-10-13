@@ -57,7 +57,7 @@
             {{ AnotherCheckTitelName | translate }}
           </th>
           <th *ngIf="showActivation" class="text-center">
-            {{ "field.activation" | translate }}
+            {{ "activation" | translate }}
           </th>
           <th *ngIf="showDelete || showEdit || showView" class="text-center">
             {{ "action.actions" | translate }}
@@ -88,7 +88,7 @@
           <td *ngFor="let prop of properties" class="text-center align-middle">
             <span
               *ngIf="
-                prop == 'createdDate' ||
+                prop == 'createdAt' ||
                 prop == 'bookingDate' ||
                 prop == 'startAt' ||
                 prop == 'endAt'
@@ -98,15 +98,15 @@
             </span>
             <span
               *ngIf="
-                prop != 'createdDate' &&
-                prop != 'mainImageUrl' &&
+                prop != 'createdAt' &&
+                prop != 'image' &&
                 prop != 'startAt' &&
                 prop != 'endAt' &&
                 prop != 'imageUrl' &&
                 prop != 'basicImageForDesignUrl'
               "
             >
-              {{ item[prop] }}
+              {{ accessNestedPropertyOfObject(item, prop) }}
             </span>
             <img
               [src]="item[prop]"
@@ -116,7 +116,7 @@
               *ngIf="
                 prop == 'imageUrl' ||
                 prop == 'basicImageForDesignUrl' ||
-                prop == 'mainImageUrl'
+                prop == 'image'
               "
             />
           </td>
@@ -183,7 +183,7 @@
   </div>
 </div>
 <div class="row" *ngIf="showPagination">
-  <div class="col-md-1 col-sm-12 text-right">
+  <div class="col-lg-1 col-md-2 col-sm-12 text-right">
     <select
       [disabled]="busyLoading"
       class="form-control text-center"

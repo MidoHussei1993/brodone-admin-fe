@@ -17,7 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     SharedComponentsModule,
     SessionsRoutingModule,
-    TranslateModule,
+    SharedModule
+
 
   ],
   declarations: [SignupComponent, SigninComponent, ForgotComponent]

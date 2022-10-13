@@ -47,40 +47,40 @@ export class SigninComponent implements OnInit {
     });
 
     this.signinForm = this.fb.group({
-      email: ["", Validators.required],
+      identifier: ["", Validators.required],
       password: ["", Validators.required],
     });
   }
 
   signin() {
+    // this.auth.signin(this.signinForm.value).subscribe((result) => {
+    //   this.loading = false;
+    //   this.router.navigateByUrl("/dashboard/v1");
+    // });
     if (!this.signinForm.valid) return;
-    const loginModel = new LoginModel();
-    loginModel.password = this.signinForm.get("password").value;
-    loginModel.username = this.signinForm.get("email").value;
     this.spinner.show();
     this.loading = true;
-    this.loginService.login(loginModel).subscribe(
+    this.loginService.login(this.signinForm.value).subscribe(
       (res) => {
-        localStorage.setItem("token", res.access_token);
-        localStorage.setItem("user", JSON.stringify(res));
-        localStorage.setItem("roles", JSON.stringify(res.Roles));
         this.spinner.hide();
+        console.log(res)
+        localStorage.setItem("token", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
 
-        this.auth.signin(this.signinForm.value).subscribe((result) => {
-          this.loading = false;
+        // localStorage.setItem("user", JSON.stringify(res));
+        // localStorage.setItem("roles", JSON.stringify(res.Roles));
+
+        this.loading = true;
+        this.loadingText = "Sigining in...";
+        this.auth.signin(this.signinForm.value).subscribe((res) => {
           this.router.navigateByUrl("/dashboard/v1");
-        });
+          this.loading = false;
       },
       (err) => {
         this.spinner.hide();
         this.loading = false;
       }
     );
-    // this.loading = true;
-    // this.loadingText = "Sigining in...";
-    // this.auth.signin(this.signinForm.value).subscribe((res) => {
-    //   this.router.navigateByUrl("/dashboard/v1");
-    //   this.loading = false;
-    // });
+    });
   }
 }

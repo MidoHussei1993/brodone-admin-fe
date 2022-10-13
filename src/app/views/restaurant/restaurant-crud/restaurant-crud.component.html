@@ -1,0 +1,672 @@
+<div class="card card-flush shadow-sm">
+  <div class="card-header">
+    <h3 class="card-title">
+      <span> {{ mode | translate }} - </span>
+      <span class="mx-2"> {{ "restaurant" | translate }} </span>
+    </h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "title" | translate }}</label>
+          <input
+            type="text"
+            formControlName="title"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'title' | translate }}"
+          />
+          <div
+            *ngIf="
+              !form.get('title').valid &&
+              (form.get('title').dirty || form.get('title').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('title').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('title').hasError('pattern')">
+              {{ "only_en" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "title" | translate }} ع</label>
+          <input
+            type="text"
+            formControlName="titleAr"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'title' | translate }} ع"
+          />
+          <div
+            *ngIf="
+              !form.get('titleAr').valid &&
+              (form.get('titleAr').dirty || form.get('titleAr').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('titleAr').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('titleAr').hasError('pattern')">
+              {{ "only_ar" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "description" | translate }}</label>
+          <input
+            type="text"
+            formControlName="description"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'description' | translate }}"
+          />
+          <div
+            *ngIf="
+              !form.get('description').valid &&
+              (form.get('description').dirty || form.get('description').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('description').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('description').hasError('pattern')">
+              {{ "only_en" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "description" | translate }} ع</label>
+          <input
+            type="text"
+            formControlName="descriptionAr"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'description' | translate }} ع"
+          />
+          <div
+            *ngIf="
+              !form.get('descriptionAr').valid &&
+              (form.get('descriptionAr').dirty ||
+                form.get('descriptionAr').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('descriptionAr').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('descriptionAr').hasError('pattern')">
+              {{ "only_ar" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "description" | translate }}</label>
+          <input
+            type="text"
+            formControlName="description"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'description' | translate }}"
+          />
+          <div
+            *ngIf="
+              !form.get('description').valid &&
+              (form.get('description').dirty || form.get('description').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('description').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('description').hasError('pattern')">
+              {{ "only_en" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "description" | translate }} ع</label>
+          <input
+            type="text"
+            formControlName="descriptionAr"
+            class="form-control form-control-rounded"
+            placeholder="{{ 'description' | translate }} ع"
+          />
+          <div
+            *ngIf="
+              !form.get('descriptionAr').valid &&
+              (form.get('descriptionAr').dirty ||
+                form.get('descriptionAr').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('descriptionAr').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+            <p *ngIf="form.get('descriptionAr').hasError('pattern')">
+              {{ "only_ar" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <div class="card border">
+            <div class="card-body" formArrayName="tagsId">
+              <div class="d-flex justify-content-between">
+                <div class="col-12">
+                  <!-- <button
+                    (click)="addForm('tagsId',this.initTagItem())"
+                    type="button"
+                    class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                  >
+                    <i class="fas fa-plus"></i>
+                    {{ "add" | translate }}
+                  </button> -->
+                  <label for="picker1">
+                    {{ "tags" | translate }}
+                  </label>
+                  <select
+                  multiple
+                    class="form-control form-control-rounded"
+                    (input)="addForm('tagsId',this.initTagItem($event.target['value']))"
+                  >
+                    <option
+                    
+                      *ngFor="let item of tagList; let i = index"
+                      [ngValue]="item.id"
+                    >
+                    {{ currentLanguage == "en" ? item.title : item.titleAr }}
+                    </option>
+                  </select>
+                </div>
+              
+              </div>
+
+
+              <div
+                class="card bg-light my-2"
+                *ngFor="
+                  let item of form.get('tagsId')['controls'];
+                  let i = index
+                "
+              >
+                <div class="card-body py-1">
+                  <div class="d-flex justify-content-around">
+                    <div class="p-2 text-white"  [formGroupName]="i" >
+                      <input
+                        type="text"
+                        formControlName="tag"
+                        class="form-control form-control-rounded"
+                        placeholder="{{ 'tag' | translate }}"
+                      />
+                      <div
+                      *ngIf="
+                        !form.get('tagsId').controls[i].get('tag').valid &&
+                        (form.get('tagsId').controls[i].get('tag').dirty || form.get('tagsId').controls[i].get('tag').touched)
+                      "
+                      class="text text-danger"
+                    >
+                      <p class="text-center mb-0 mt-1" *ngIf="form.get('tagsId').controls[i].get('tag').hasError('required')">
+                        {{ "required" | translate }}
+                      </p>
+                    </div>
+                    </div>
+
+                    <div class="p-1">
+                      <span
+                        title="{{ 'Delete' | translate }}"
+                        class="badge badge-pill badge-danger p-2 mr-1"
+                        (click)="deleteForm('tagsId',i)"
+                      >
+                        <i
+                          title="{{ 'Delete' | translate }}"
+                          class="text-20 font-weight-bold i-Delete-File"
+                        ></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div formGroupName="restaurantAdmin">
+        <h4>
+          {{ "restaurantAdmin" | translate }}
+        </h4>
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "firstName" | translate }}</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'firstName' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.firstName').valid &&
+                (form.get('restaurantAdmin.firstName').dirty ||
+                  form.get('restaurantAdmin.firstName').touched)
+              "
+              class="text text-danger"
+            >
+              <p
+                *ngIf="
+                  form.get('restaurantAdmin.firstName').hasError('required')
+                "
+              >
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "lastName" | translate }} </label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'lastName' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.lastName').valid &&
+                (form.get('restaurantAdmin.lastName').dirty ||
+                  form.get('restaurantAdmin.lastName').touched)
+              "
+              class="text text-danger"
+            >
+              <p
+                *ngIf="
+                  form.get('restaurantAdmin.lastName').hasError('required')
+                "
+              >
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "email" | translate }}</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'email' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.email').valid &&
+                (form.get('restaurantAdmin.email').dirty ||
+                  form.get('restaurantAdmin.email').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('restaurantAdmin.email').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "password" | translate }} </label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'password' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.password').valid &&
+                (form.get('restaurantAdmin.password').dirty ||
+                  form.get('restaurantAdmin.password').touched)
+              "
+              class="text text-danger"
+            >
+              <p
+                *ngIf="
+                  form.get('restaurantAdmin.password').hasError('required')
+                "
+              >
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "countryCode" | translate }}</label>
+            <input
+              type="text"
+              formControlName="countryCode"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'countryCode' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.countryCode').valid &&
+                (form.get('restaurantAdmin.countryCode').dirty ||
+                  form.get('restaurantAdmin.countryCode').touched)
+              "
+              class="text text-danger"
+            >
+              <p
+                *ngIf="
+                  form.get('restaurantAdmin.countryCode').hasError('required')
+                "
+              >
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "phoneNumber" | translate }} </label>
+            <input
+              type="number"
+              formControlName="phoneNumber"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'phoneNumber' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('restaurantAdmin.phoneNumber').valid &&
+                (form.get('restaurantAdmin.phoneNumber').dirty ||
+                  form.get('restaurantAdmin.phoneNumber').touched)
+              "
+              class="text text-danger"
+            >
+              <p
+                *ngIf="
+                  form.get('restaurantAdmin.phoneNumber').hasError('required')
+                "
+              >
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div formGroupName="branch">
+        <h4>
+          {{ "branch" | translate }}
+        </h4>
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "title" | translate }}</label>
+            <input
+              type="text"
+              formControlName="title"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'title' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.title').valid &&
+                (form.get('branch.title').dirty ||
+                  form.get('branch.title').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.title').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+              <p *ngIf="form.get('branch.title').hasError('pattern')">
+                {{ "only_en" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "title" | translate }} ع</label>
+            <input
+              type="text"
+              formControlName="titleAr"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'title' | translate }} ع"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.titleAr').valid &&
+                (form.get('branch.titleAr').dirty ||
+                  form.get('branch.titleAr').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.titleAr').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+              <p *ngIf="form.get('branch.titleAr').hasError('pattern')">
+                {{ "only_ar" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "description" | translate }}</label>
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'description' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.description').valid &&
+                (form.get('branch.description').dirty ||
+                  form.get('branch.description').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.description').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+              <p *ngIf="form.get('branch.description').hasError('pattern')">
+                {{ "only_en" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "description" | translate }} ع</label>
+            <input
+              type="text"
+              formControlName="descriptionAr"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'description' | translate }} ع"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.descriptionAr').valid &&
+                (form.get('branch.descriptionAr').dirty ||
+                  form.get('branch.descriptionAr').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.descriptionAr').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+              <p *ngIf="form.get('branch.descriptionAr').hasError('pattern')">
+                {{ "only_ar" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "countryCode" | translate }}</label>
+            <input
+              type="text"
+              formControlName="countryCode"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'countryCode' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.countryCode').valid &&
+                (form.get('branch.countryCode').dirty ||
+                  form.get('branch.countryCode').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.countryCode').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label class="form-label">{{ "address" | translate }} </label>
+            <input
+              type="text"
+              formControlName="address"
+              class="form-control form-control-rounded"
+              placeholder="{{ 'address' | translate }}"
+            />
+            <div
+              *ngIf="
+                !form.get('branch.address').valid &&
+                (form.get('branch.address').dirty ||
+                  form.get('branch.address').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch.address').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <div class="card border" >
+              <div class="card-body" formArrayName="phoneNumbers">
+                <div class="d-flex justify-content-between">
+                  <div class="p-2">
+                    <h5>
+                      {{ "phoneNumber" | translate }}
+                    </h5>
+                  </div>
+                  <div class="p-2">
+                    <button
+                      (click)="addPhoneForm()"
+                      type="button"
+                      class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                    >
+                      <i class="fas fa-plus"></i>
+                      {{ "add" | translate }}
+                    </button>
+                  </div>
+                </div>
+  
+                <div
+                  class="card bg-light my-2"
+                  *ngFor="
+                    let item of form.get('branch').get('phoneNumbers')['controls'];
+                    let i = index
+                  "
+                >
+                  <div class="card-body py-1">
+                    <div class="d-flex justify-content-around">
+                      <div class="p-2 text-white w-100"  [formGroupName]="i" >
+                        <input
+                          type="number"
+                          formControlName="phone"
+                          class="form-control form-control-rounded"
+                          placeholder="{{ 'phone' | translate }}"
+                        />
+                        <div
+                        *ngIf="
+                          !form.get('branch').controls.phoneNumbers.controls[i].get('phone').valid &&
+                          (form.get('branch').controls.phoneNumbers.controls[i].get('phone').dirty || form.get('branch').controls.phoneNumbers.controls[i].get('phone').touched)
+                        "
+                        class="text text-danger"
+                      >
+                        <p class="text-center mb-0 mt-1" *ngIf="form.get('branch').controls.phoneNumbers.controls[i].get('phone').hasError('required')">
+                          {{ "required" | translate }}
+                        </p>
+                      </div>
+                      </div>
+  
+                      <div class="p-1">
+                        <span
+                          title="{{ 'Delete' | translate }}"
+                          class="badge badge-pill badge-danger p-2 mr-1"
+                          (click)="deletePhoneForm(i)"
+                        >
+                          <i
+                            title="{{ 'Delete' | translate }}"
+                            class="text-20 font-weight-bold i-Delete-File"
+                          ></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+            *ngIf="
+              !form.get('branch').get('phoneNumbers').valid &&
+              (form.get('branch').get('phoneNumbers').dirty || form.get('branch').get('phoneNumbers').touched)
+            "
+            class="text text-danger"
+          >
+            <p class="text-center mb-0 mt-1" *ngIf="form.get('branch').get('phoneNumbers').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <p class="lead mx-2">
+            {{ "Locate_loacation" | translate }}
+          </p>
+          <div class="col-md-12 mx-auto border py-2 shadow" style="height: 50vh">
+            <app-google-map
+              (marker)="setLocation($event)"
+              [markerPositions]="locationList"
+            ></app-google-map>
+            <div
+              *ngIf="
+                !form.get('branch').get('lat').valid &&
+                (form.get('branch').get('lat').dirty || form.get('branch').get('lat').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('branch').get('lat').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="d-flex justify-content-center my-5">
+        <div class="p-2" *ngIf="mode != 'View'">
+          <button
+            type="submit"
+            class="btn btn-info btn-block btn-hover-scale px-5"
+          >
+            {{ "save" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,24 +1,39 @@
-<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+<div
+  class="card o-hidden"
+  [@animate]="{
+    value: '*',
+    params: { y: '120px', opacity: '0', delay: '100ms', duration: '400ms' }
+  }"
+>
   <div class="row">
-    <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/photo-long-3.jpg)">
+    <div
+      class="col-md-6 text-center"
+      style="
+        background-size: cover;
+        background-image: url(./assets/images/photo-long-3.jpg);
+      "
+    >
       <div class="pl-3 auth-right">
         <div class="auth-logo text-center mt-4">
-          <img src="assets/images/logo.png" alt="">
+          <img src="assets/images/logo.png" alt="" />
         </div>
         <div class="flex-grow-1"></div>
         <div class="w-100 mb-4">
-          <button class="btn btn-outline-primary btn-outline-email btn-block btn-icon-text btn-rounded" routerLink="/sessions/signin">
+          <button
+            class="btn btn-outline-primary btn-outline-email btn-block btn-icon-text btn-rounded"
+            routerLink="/sessions/signin"
+          >
             <i class="i-Mail-with-At-Sign"></i>
-            Sign in with Email
+            {{ "signIn" | translate }}
           </button>
-          <button class="btn btn-outline-primary btn-outline-google btn-block btn-icon-text btn-rounded">
+          <!-- <button class="btn btn-outline-primary btn-outline-google btn-block btn-icon-text btn-rounded">
             <i class="i-Google-Plus"></i>
             Sign in with Google
           </button>
           <button class="btn btn-outline-primary btn-outline-facebook btn-block btn-icon-text btn-rounded">
             <i class="i-Facebook-2"></i>
             Sign in with Facebook
-          </button>
+          </button> -->
         </div>
         <div class="flex-grow-1"></div>
       </div>
@@ -26,27 +41,132 @@
 
     <div class="col-md-6">
       <div class="p-4">
-        
-        <h1 class="mb-3 text-18">Sign Up</h1>
+        <h1 class="mb-3 text-18">{{ "signUp" | translate }}</h1>
         <!-- <p class="mb-4 text-muted font-small">Lorem ipsum dolor sit amet.</p> -->
-        <form action="">
+        <form [formGroup]="form" (ngSubmit)="submit()">
           <div class="form-group">
-            <label for="username">Your name</label>
-            <input id="username" class="form-control form-control-rounded" type="text">
+            <label > {{ "firstName" | translate }}</label>
+            <input
+              formControlName="firstName"
+              class="form-control form-control-rounded"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !form.get('firstName').valid &&
+                (form.get('firstName').dirty || form.get('firstName').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('firstName').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
           </div>
           <div class="form-group">
-            <label for="email">Email address</label>
-            <input id="email" class="form-control form-control-rounded" type="email">
+            <label > {{ "lastName" | translate }}</label>
+            <input
+              formControlName="lastName"
+              class="form-control form-control-rounded"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !form.get('lastName').valid &&
+                (form.get('lastName').dirty || form.get('lastName').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('lastName').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" class="form-control form-control-rounded" type="password">
+            <label > {{ "countryCode" | translate }}</label>
+            <input
+              formControlName="countryCode"
+              id="username"
+              class="form-control form-control-rounded"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !form.get('countryCode').valid &&
+                (form.get('countryCode').dirty || form.get('countryCode').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('countryCode').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
           </div>
           <div class="form-group">
-            <label for="repassword">Retype password</label>
-            <input id="repassword" class="form-control form-control-rounded" type="password">
+            <label > {{ "phoneNumber" | translate }}</label>
+            <input
+              formControlName="phoneNumber"
+              class="form-control form-control-rounded"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !form.get('phoneNumber').valid &&
+                (form.get('phoneNumber').dirty || form.get('phoneNumber').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('phoneNumber').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
           </div>
-          <button class="btn btn-primary btn-block btn-rounded mt-3">Sign Up</button>
+
+     
+          <div class="form-group">
+            <label for="email"> {{ "email" | translate }}</label>
+            <input
+              formControlName="email"
+              id="email"
+              class="form-control form-control-rounded"
+              type="email"
+            />
+            <div
+              *ngIf="
+                !form.get('email').valid &&
+                (form.get('email').dirty || form.get('email').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('email').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">{{ "password" | translate }}</label>
+            <input
+              formControlName="password"
+              id="password"
+              class="form-control form-control-rounded"
+              type="password"
+            />
+            <div
+              *ngIf="
+                !form.get('password').valid &&
+                (form.get('password').dirty || form.get('password').touched)
+              "
+              class="text text-danger"
+            >
+              <p *ngIf="form.get('password').hasError('required')">
+                {{ "required" | translate }}
+              </p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-rounded mt-3">
+            {{ "signUp" | translate }}
+          </button>
         </form>
       </div>
     </div>

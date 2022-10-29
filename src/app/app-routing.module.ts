@@ -79,6 +79,16 @@ const adminRoutes: Routes = [
     loadChildren: () =>
       import("./views/attributes/attributes.module").then((m) => m.AttributesModule),
   },
+  {
+    path: "attribute-values/:restaurantId",
+    loadChildren: () =>
+      import("./views/attributes-values/attributes-values.module").then((m) => m.AttributesValuesModule),
+  },
+  {
+    path: "variation/:restaurantId",
+    loadChildren: () =>
+      import("./views/variation/variation.module").then((m) => m.VariationModule),
+  },
 ];
 
 const routes: Routes = [

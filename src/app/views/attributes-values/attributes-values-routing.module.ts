@@ -6,21 +6,21 @@ import { AttributesValuesListComponent } from './attributes-values-list/attribut
 
 const routes: Routes = [
   {
-    path: "",
+    path: "list/:attributeId",
     component: AttributesValuesListComponent,
   },
   {
-    path: "create",
+    path: "create/:attributeId",
     component: AttributesValuesCrudComponent,
     data: { mode: FormMode.Create },
   },
   {
-    path: "edit/:id",
+    path: "edit/:attributeId/:id",
     component: AttributesValuesCrudComponent,
     data: { mode: FormMode.Edit },
   },
   {
-    path: "view/:id",
+    path: "view/:attributeId/:id",
     component: AttributesValuesCrudComponent,
     data: { mode: FormMode.View },
   },

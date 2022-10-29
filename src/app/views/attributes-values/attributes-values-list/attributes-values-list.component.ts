@@ -17,6 +17,7 @@ export class AttributesValuesListComponent
   implements OnInit
 {
   currentId: number = null;
+  attributeId: number = null;
 
   constructor(
     private attributesValuesService: AttributesValuesService,
@@ -28,24 +29,25 @@ export class AttributesValuesListComponent
     public router: Router
   ) {
     super(attributesValuesService, notifier, spinner, translate, route, router);
-    this.titles = ["createdAt", "name", "name", "description", "description"];
+    this.titles = ["createdAt", "title", "titleAr", "description", "description"];
     this.properties = [
       "createdAt",
-      "name",
-      "nameAr",
+      "value",
+      "valueAr",
       "description",
       "descriptionAr",
     ];
   }
 
   ngOnInit(): void {
-    this.currentId = this.route.snapshot.params.attributeId;
+    this.currentId = this.route.snapshot.params.restaurantId;
+    this.attributeId = this.route.snapshot.params.attributeId;
     this.getList();
   }
 
   getList() {
     this.spinner.show();
-    this.attributesValuesService.get(this.route.snapshot.params.attributeId,this.filter).subscribe(
+    this.attributesValuesService.get(this.route.snapshot.params.restaurantId,this.route.snapshot.params.attributeId,this.filter).subscribe(
       (res: any) => {
         this.spinner.hide();
         this.list = res.data;
@@ -60,12 +62,12 @@ export class AttributesValuesListComponent
 
   navigateToEdit(event) {
     this.router.navigateByUrl(
-      `/attributes-values/${this.route.snapshot.params.attributeId}/edit/${event.id}`
+      `/attribute-values/${this.route.snapshot.params.restaurantId}/edit/${this.route.snapshot.params.attributeId}/${event.id}`
     );
   }
   navigateToView(event) {
     this.router.navigateByUrl(
-      `/attributes-values/${this.route.snapshot.params.attributeId}/view/${event.id}`
+      `/attribute-values/${this.route.snapshot.params.restaurantId}/view/${this.route.snapshot.params.attributeId}/${event.id}`
     );
   }
 }

@@ -26,11 +26,15 @@
       [showSearch]="false"
       [showEdit]="true"
       [showView]="true"
-      [showDelete]="true"
+      [showDelete]="false"
       (view)="navigateToView($event)"
       (edit)="navigateToEdit($event)"
       (search)="searchValue()"
       (resetFilter)="resetfilter()"
+      (aciton)="navigateTO($event)"
+      [actionList]="[
+        {title:'attribueValues',icon:'i-Idea-3 ',type:'attributeValues'},
+        ]"
     ></app-table>
   </div>
   

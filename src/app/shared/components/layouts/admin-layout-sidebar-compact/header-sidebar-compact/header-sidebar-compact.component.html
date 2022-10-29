@@ -11,7 +11,7 @@
     
         <div class="d-flex align-items-center">
             <!-- Mega menu -->
-            <div ngbDropdown class="mega-menu d-none d-md-block">
+            <!-- <div ngbDropdown class="mega-menu d-none d-md-block">
                 <button ngbDropdownToggle href="#" class="btn text-muted dropdown-toggle mr-3">Mega Menu</button>
                 <div ngbDropdownMenu perfectScrollbar>
                     <div class="row m-0">
@@ -54,20 +54,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Search bar -->
-            <div class="search-bar">
+            <!-- <div class="search-bar">
                 <input type="text" placeholder="بحث" (focus)="searchService.searchOpen = true">
                 <i class="search-icon text-muted i-Magnifi-Glass1"></i>
-            </div>
+            </div> -->
         </div>
     
         <div style="margin: auto"></div>
     
         <div class="header-part-right">
-            <i class="i-Magnifi-Glass1 header-icon" role="button" (click)="searchService.searchOpen = true"></i>
+            <!-- <i class="i-Magnifi-Glass1 header-icon" role="button" (click)="searchService.searchOpen = true"></i> -->
             <i fullScreenWindow class="i-Full-Screen header-icon d-none d-sm-inline-block" role="button"></i>
-            <div ngbDropdown [placement]="'bottom-right'" class="d-none d-sm-inline-block">
+            <!-- <div ngbDropdown [placement]="'bottom-right'" class="d-none d-sm-inline-block">
                 <i ngbDropdownToggle class="i-Gear text-muted header-icon" role="button"></i>
                 <div ngbDropdownMenu class="menu-icon-grid-dropdown">
                     <div class="menu-icon-grid">
@@ -79,9 +79,9 @@
                         <a href="#"><i class="i-Ambulance"></i> Support</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
     
-            <div ngbDropdown [placement]="'bottom-right'">
+            <!-- <div ngbDropdown [placement]="'bottom-right'">
                 <div class="badge-top-container">
                     <span class="badge badge-primary">{{notifications?.length}}</span>
                     <i ngbDropdownToggle class="i-Bell text-muted header-icon" role="button"></i>
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
     
             <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
                 <img src="./assets/images/faces/1.jpg" id="userDropdown" ngbDropdownToggle alt="">
@@ -113,6 +113,8 @@
                     </div>
                     <button class="dropdown-item">Account settings</button>
                     <button class="dropdown-item">Billing history</button>
+                    <button class="dropdown-item"  (click)="changeLanguage('ar')">العربية</button>
+                    <button class="dropdown-item"  (click)="changeLanguage('en')">English</button>
                     <button class="dropdown-item" (click)="signout()">Sign out</button>
                 </div>
             </div>

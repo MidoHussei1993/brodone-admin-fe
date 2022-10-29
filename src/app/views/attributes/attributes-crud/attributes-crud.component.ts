@@ -29,9 +29,6 @@ export class AttributesCrudComponent extends Crud implements OnInit {
       nameAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
       description: ['', [ Validators.required,Validators.pattern(Pattern.OnlyEnglishLettersAndSpace)]],
       descriptionAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
-      image: ["tes"],
-      parentId: [1],
-      restaurantId: [+this.route.snapshot.params.restaurantId],
     });
     this.mode = this.route.snapshot.data.mode;
     this.currentLanguage = this.translate.currentLang;

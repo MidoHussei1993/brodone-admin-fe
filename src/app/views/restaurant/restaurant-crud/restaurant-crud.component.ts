@@ -51,7 +51,7 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
       ],
       images: [["3"], [Validators.required]],
       featuredImage: ["3", [Validators.required]],
-      tagsId:new FormArray([], [Validators.required]),
+      tagsId: this.formBuilder.array([], [Validators.required]),
       restaurantAdmin: this.formBuilder.group({
         // make a nested group
         firstName: ["", [Validators.required]],
@@ -59,7 +59,7 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
         email: ["", [Validators.required]],
         password: ["", [Validators.required]],
         countryCode: ["", [Validators.required]],
-        phoneNumber: ["01062650000", [Validators.required]],
+        phoneNumber: ["", [Validators.required]],
       }),
       branch: this.formBuilder.group({
         title: [
@@ -100,6 +100,7 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
     }
     if (this.mode === FormMode.Create) {
       this.addPhoneForm();
+      // this.addRestaurantAdminPhoneForm()
     }
   }
 
@@ -112,7 +113,10 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
   getTagList() {
     this.tagService.get({ limit: 50 }).subscribe(
       (res: any) => {
-        this.tagList = res.data;
+        this.tagList = res.data.map((tag) => {
+          tag.selected = false;
+          return tag;
+        });
         this.spinner.hide();
       },
       (err) => {
@@ -120,7 +124,6 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
       }
     );
   }
-
 
   initTagItem(val = "") {
     const form = this.formBuilder.group({
@@ -161,14 +164,63 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
     const form = this.formBuilder.group({
       phone: [val, Validators.required],
     });
+    (this.form.controls.branch.get("phoneNumbers") as FormArray)
     return form;
+  }
+
+  submit() {
+    this.form.markAllAsTouched();
+    let selectedTags: any = this.tagList
+      .filter((item) => item.selected)
+      .map(({ id }) => id);
+
+    // this.form.get("tagsId").patchValue(selectedTags);
+    selectedTags.map((item, index) => {
+      (this.form.get("tagsId") as FormArray).push(
+        this.formBuilder.group({
+          value: [item],
+        })
+      );
+    });
+    // (this.form.get('tagsId')as FormArray).push(selectedTags])
+    console.log("🚀 ~ file: restaurant-crud.component.ts ~ line 175 ~ RestaurantCrudComponent ~ submit ~ this.form.get('tagsId')", this.form.get('tagsId').value)
+    if (!this.form.valid) return;
+    console.log(this.form);
+    if (this.mode === FormMode.Create) {
+      this.create();
+    } else {
+      this.edit();
+    }
+  }
+
+  create() {
+    let body = this.form.value;
+    body.tagsId = body.tagsId.map(({value})=> value);
+    body.lat = +body.lat;
+    body.lng = +body.lng;
+    body.branch.phoneNumbers = body.branch.phoneNumbers.map(({ phone }) => String(phone));
+    this.spinner.show();
+    this.mainService.create(body).subscribe(
+      (result) => {
+        this.spinner.hide();
+        this.form.reset();
+        // this.form.get('id').patchValue(0);
+        this.notifier.notify("success", this.translate.instant("created"));
+      },
+      (err) => {
+        this.spinner.hide();
+        // this.notifier.notify('error',err)
+      }
+    );
   }
 
   edit() {
     let body = this.form.value;
+    console.log(body)
+    body.tagsId = body.tagsId.map(({value})=> value)
     body.lat = +body.lat;
     body.lng = +body.lng;
-    body.phoneNumbers = body.phoneNumbers.map(({ phone }) => String(phone));
+    body.branch.phoneNumbers = body.branch.phoneNumbers.map(({ phone }) => String(phone));
     this.spinner.show();
     this.restaurantService.edit(this.route.snapshot.params.id, body).subscribe(
       (result) => {
@@ -182,12 +234,10 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
     );
   }
 
-  setMarkerLocation(propName: string) {
-    if (propName == "latitude") {
-      this.locationList[0].lat = this.form.get("branch").get("lat").value;
-    } else {
-      this.locationList[0].lng = this.form.get("branch").get("lng").value;
-    }
+  setMarkerLocation(location: { lat: number; lng: number }) {
+    this.locationList[0] = location;
+       this.form.get("branch").get("lat").patchValue(location.lat);
+       this.form.get("branch").get("lng").patchValue(location.lng);
   }
 
   addPhoneForm(val = "") {
@@ -199,6 +249,18 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
   }
   deletePhoneForm(index: number) {
     (this.form.controls.branch.get("phoneNumbers") as FormArray).removeAt(
+      index
+    );
+  }
+  addRestaurantAdminPhoneForm(val = "") {
+    (this.form.controls.restaurantAdmin.get("phoneNumber") as FormArray).push(
+      this.formBuilder.group({
+        phone: [val, Validators.required],
+      })
+    );
+  }
+  deleteRestaurantAdminPhoneForm(index: number) {
+    (this.form.controls.restaurantAdmin.get("phoneNumber") as FormArray).removeAt(
       index
     );
   }

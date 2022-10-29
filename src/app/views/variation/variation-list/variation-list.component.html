@@ -1,0 +1,27 @@
+<div class="mb-4">
+  <div class="breadcrumb">
+    <h1 class="">{{ "variations" | translate }}</h1>
+    <ul>
+      <li>
+        <a class="text-dark font-weight-bold">{{ "list" | translate }}</a>
+      </li>
+      <li>{{ "variations" | translate }}</li>
+    </ul>
+  </div>
+
+  <app-table
+    [create]="'/variation/' + currentId + '/create/' + menuItemId"
+    [list]="list"
+    [titles]="titles"
+    [properties]="properties"
+    [pagination]="pagination"
+    (activetedPageSize)="setPagelimit($event)"
+    (activetedPageNumber)="setPageNumber($event)"
+    [showSearch]="false"
+    [showEdit]="true"
+    [showView]="true"
+    [showDelete]="false"
+    (view)="navigateToView($event)"
+    (edit)="navigateToEdit($event)"
+  ></app-table>
+</div>

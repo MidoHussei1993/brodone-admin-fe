@@ -6,3 +6,11 @@ input.ng-dirty.ng-invalid {
     color: red;
   }
   
+
+  .fa{
+    font-family: var(--fa-style-family,"Font Awesome 6 Free") !important;
+  }
+  
+  .pointer{
+    cursor: pointer;
+  }

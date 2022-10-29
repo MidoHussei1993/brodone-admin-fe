@@ -65,6 +65,7 @@ export class AttributesValuesCrudComponent extends Crud implements OnInit {
     this.spinner.show();
     this.attributesValuesService
       .getById(
+        this.route.snapshot.params.restaurantId,
         this.route.snapshot.params.attributeId,
         this.route.snapshot.params.id
       )
@@ -85,7 +86,7 @@ export class AttributesValuesCrudComponent extends Crud implements OnInit {
     let body = this.form.value;
     this.spinner.show();
     this.attributesValuesService
-      .create(this.route.snapshot.params.attributeId, body)
+      .create(this.route.snapshot.params.restaurantId,this.route.snapshot.params.attributeId, body)
       .subscribe(
         (result) => {
           this.spinner.hide();
@@ -104,6 +105,7 @@ export class AttributesValuesCrudComponent extends Crud implements OnInit {
     this.spinner.show();
     this.attributesValuesService
       .edit(
+        this.route.snapshot.params.restaurantId,
         this.route.snapshot.params.attributeId,
         this.route.snapshot.params.id,
         body

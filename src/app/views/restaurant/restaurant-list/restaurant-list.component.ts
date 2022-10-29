@@ -118,6 +118,9 @@ export class RestaurantListComponent implements OnInit {
       case "menusItems":
         this.router.navigateByUrl(`menus-items/${restaurant.event.id}`);
         break;
+      case "attributes":
+        this.router.navigateByUrl(`attributes/${restaurant.event.id}`);
+        break;
 
       default:
         break;

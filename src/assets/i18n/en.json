@@ -122,5 +122,7 @@
   "variations": "Variations",
   "attribueValues": "attribue Values",
   "value": "Value",
+  "titleAr": "Arabic Title",
+  "descriptionAr":"Arabic Description ",
   "printer": "printer"
 }

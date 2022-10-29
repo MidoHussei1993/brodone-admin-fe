@@ -2,166 +2,17 @@
     <div class="card-header">
       <h3 class="card-title">
         <span> {{ mode | translate }} - </span>
-        <span class="mx-2"> {{ "menuItems" | translate }} </span>
+        <span class="mx-2"> {{ "variations" | translate }} </span>
       </h3>
     </div>
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="row mt-3">
-          <div class="col-md-6 col-sm-12">
-            <label class="form-label">{{ "title" | translate }}</label>
-            <input
-              type="text"
-              formControlName="title"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'title' | translate }}"
-            />
-            <div
-              *ngIf="
-                !form.get('title').valid &&
-                (form.get('title').dirty || form.get('title').touched)
-              "
-              class="text text-danger"
-            >
-              <p *ngIf="form.get('title').hasError('required')">
-                {{ "required" | translate }}
-              </p>
-              <p *ngIf="form.get('title').hasError('pattern')">
-                {{ "only_en" | translate }}
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <label class="form-label">{{ "title" | translate }} ع</label>
-            <input
-              type="text"
-              formControlName="titleAr"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'title' | translate }} ع"
-            />
-            <div
-              *ngIf="
-                !form.get('titleAr').valid &&
-                (form.get('titleAr').dirty || form.get('titleAr').touched)
-              "
-              class="text text-danger"
-            >
-              <p *ngIf="form.get('titleAr').hasError('required')">
-                {{ "required" | translate }}
-              </p>
-              <p *ngIf="form.get('titleAr').hasError('pattern')">
-                {{ "only_ar" | translate }}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-6 col-sm-12">
-            <label class="form-label">{{ "description" | translate }}</label>
-            <input
-              type="text"
-              formControlName="description"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'description' | translate }}"
-            />
-            <div
-              *ngIf="
-                !form.get('description').valid &&
-                (form.get('description').dirty || form.get('description').touched)
-              "
-              class="text text-danger"
-            >
-              <p *ngIf="form.get('description').hasError('required')">
-                {{ "required" | translate }}
-              </p>
-              <p *ngIf="form.get('description').hasError('pattern')">
-                {{ "only_en" | translate }}
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <label class="form-label">{{ "description" | translate }} ع</label>
-            <input
-              type="text"
-              formControlName="descriptionAr"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'description' | translate }} ع"
-            />
-            <div
-              *ngIf="
-                !form.get('descriptionAr').valid &&
-                (form.get('descriptionAr').dirty ||
-                  form.get('descriptionAr').touched)
-              "
-              class="text text-danger"
-            >
-              <p *ngIf="form.get('descriptionAr').hasError('required')">
-                {{ "required" | translate }}
-              </p>
-              <p *ngIf="form.get('descriptionAr').hasError('pattern')">
-                {{ "only_ar" | translate }}
-              </p>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row mt-3">
-          <div class="col-md-6 col-sm-12">
-            <label class="form-label">{{ "price" | translate }}</label>
-            <input
-              type="number"
-              formControlName="price"
-              class="form-control form-control-rounded"
-              placeholder="{{ 'price' | translate }}"
-            />
-            <div
-              *ngIf="
-                !form.get('price').valid &&
-                (form.get('price').dirty || form.get('price').touched)
-              "
-              class="text text-danger"
-            >
-              <p *ngIf="form.get('price').hasError('required')">
-                {{ "required" | translate }}
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <label for="picker1">
-              {{ "category" | translate }}
-            </label>
-            <select
-              formControlName="categoryId"
-              class="form-control form-control-rounded"
-            >
-              <option
-                *ngFor="let item of categoryList; let c = index"
-                [ngValue]="+item.id"
-              >
-              {{ currentLanguage == "en" ? item.name : item.nameAr }}
-              </option>
-            </select>
-            <div
-            *ngIf="
-              !form.get('categoryId').valid &&
-              (form.get('categoryId').dirty || form.get('categoryId').touched)
-            "
-            class="text text-danger"
-          >
-            <p *ngIf="form.get('categoryId').hasError('required')">
-              {{ "required" | translate }}
-            </p>
-          </div>
-          </div>
-        </div>
   
         <div class="row mt-4" formArrayName="variations">
           <div class="col-12">
             <div class="row">
               <div class="col-md-6 col-sm-12">
-                <h5 class="pt-2">
-                  <span class="mx-3 h3 "> {{ "variations" | translate }} </span>
-                </h5>
+               
               </div>
               <div class="col-md-6 col-sm-12 text-right">
                 <button

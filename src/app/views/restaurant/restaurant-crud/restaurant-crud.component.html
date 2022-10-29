@@ -105,136 +105,49 @@
         </div>
       </div>
 
+  
       <div class="row mt-3">
-        <div class="col-md-6 col-sm-12">
-          <label class="form-label">{{ "description" | translate }}</label>
-          <input
-            type="text"
-            formControlName="description"
-            class="form-control form-control-rounded"
-            placeholder="{{ 'description' | translate }}"
-          />
-          <div
-            *ngIf="
-              !form.get('description').valid &&
-              (form.get('description').dirty || form.get('description').touched)
-            "
-            class="text text-danger"
-          >
-            <p *ngIf="form.get('description').hasError('required')">
-              {{ "required" | translate }}
-            </p>
-            <p *ngIf="form.get('description').hasError('pattern')">
-              {{ "only_en" | translate }}
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <label class="form-label">{{ "description" | translate }} ع</label>
-          <input
-            type="text"
-            formControlName="descriptionAr"
-            class="form-control form-control-rounded"
-            placeholder="{{ 'description' | translate }} ع"
-          />
-          <div
-            *ngIf="
-              !form.get('descriptionAr').valid &&
-              (form.get('descriptionAr').dirty ||
-                form.get('descriptionAr').touched)
-            "
-            class="text text-danger"
-          >
-            <p *ngIf="form.get('descriptionAr').hasError('required')">
-              {{ "required" | translate }}
-            </p>
-            <p *ngIf="form.get('descriptionAr').hasError('pattern')">
-              {{ "only_ar" | translate }}
-            </p>
-          </div>
-        </div>
-      </div>
+     
 
-      <div class="row mt-3">
         <div class="col-md-6 col-sm-12">
           <div class="card border">
-            <div class="card-body" formArrayName="tagsId">
-              <div class="d-flex justify-content-between">
-                <div class="col-12">
-                  <!-- <button
-                    (click)="addForm('tagsId',this.initTagItem())"
-                    type="button"
-                    class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
-                  >
-                    <i class="fas fa-plus"></i>
-                    {{ "add" | translate }}
-                  </button> -->
-                  <label for="picker1">
-                    {{ "tags" | translate }}
+            <div class="card-header">
+              <h5>
+                {{ "tags" | translate }}
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div
+                  class="col-md-4 col-sm-6 d-flex"
+                  *ngFor="let item of tagList; let i = index"
+                >
+                  <label class="checkbox checkbox-info text">
+                    <input
+                      checked=""
+                      [(ngModel)]="item.selected"
+                      [value]="item.id"
+                      [ngModelOptions]="{standalone: true}"
+                      type="checkbox"
+                    />
+                    <span> {{ currentLanguage == "en" ? item.title : item.titleAr }} </span
+                    ><span class="checkmark"></span>
                   </label>
-                  <select
-                  multiple
-                    class="form-control form-control-rounded"
-                    (input)="addForm('tagsId',this.initTagItem($event.target['value']))"
-                  >
-                    <option
-                    
-                      *ngFor="let item of tagList; let i = index"
-                      [ngValue]="item.id"
-                    >
-                    {{ currentLanguage == "en" ? item.title : item.titleAr }}
-                    </option>
-                  </select>
-                </div>
-              
-              </div>
-
-
-              <div
-                class="card bg-light my-2"
-                *ngFor="
-                  let item of form.get('tagsId')['controls'];
-                  let i = index
-                "
-              >
-                <div class="card-body py-1">
-                  <div class="d-flex justify-content-around">
-                    <div class="p-2 text-white"  [formGroupName]="i" >
-                      <input
-                        type="text"
-                        formControlName="tag"
-                        class="form-control form-control-rounded"
-                        placeholder="{{ 'tag' | translate }}"
-                      />
-                      <div
-                      *ngIf="
-                        !form.get('tagsId').controls[i].get('tag').valid &&
-                        (form.get('tagsId').controls[i].get('tag').dirty || form.get('tagsId').controls[i].get('tag').touched)
-                      "
-                      class="text text-danger"
-                    >
-                      <p class="text-center mb-0 mt-1" *ngIf="form.get('tagsId').controls[i].get('tag').hasError('required')">
-                        {{ "required" | translate }}
-                      </p>
-                    </div>
-                    </div>
-
-                    <div class="p-1">
-                      <span
-                        title="{{ 'Delete' | translate }}"
-                        class="badge badge-pill badge-danger p-2 mr-1"
-                        (click)="deleteForm('tagsId',i)"
-                      >
-                        <i
-                          title="{{ 'Delete' | translate }}"
-                          class="text-20 font-weight-bold i-Delete-File"
-                        ></i>
-                      </span>
-                    </div>
-                  </div>
+                  <!-- <div class="" style="width:30px;height:30px;background-color:{{item.hexa}};"></div> -->
                 </div>
               </div>
             </div>
+            <div
+            *ngIf="
+              !form.get('tagsId').valid &&
+              (form.get('tagsId').dirty || form.get('tagsId').touched)
+            "
+            class="text text-danger"
+          >
+            <p class="text-center mb-0 mt-1" *ngIf="form.get('tagsId').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
           </div>
         </div>
       </div>
@@ -373,7 +286,9 @@
           <div class="col-md-6 col-sm-12">
             <label class="form-label">{{ "phoneNumber" | translate }} </label>
             <input
-              type="number"
+              type="text"
+              minlength="9"
+              maxlength="11"
               formControlName="phoneNumber"
               class="form-control form-control-rounded"
               placeholder="{{ 'phoneNumber' | translate }}"
@@ -396,6 +311,87 @@
             </div>
           </div>
         </div>
+        <!-- <div class="row mt-3">
+          <div class="col-md-6 col-sm-12">
+            <div class="card border" >
+              <div class="card-body" formArrayName="phoneNumber">
+                <div class="d-flex justify-content-between">
+                  <div class="p-2">
+                    <h5>
+                      {{ "phoneNumber" | translate }}
+                    </h5>
+                  </div>
+                  <div class="p-2">
+                    <button
+                      (click)="addRestaurantAdminPhoneForm()"
+                      type="button"
+                      class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
+                    >
+                      <i class="fas fa-plus"></i>
+                      {{ "add" | translate }}
+                    </button>
+                  </div>
+                </div>
+  
+                <div
+                  class="card bg-light my-2"
+                  *ngFor="
+                    let item of form.get('restaurantAdmin').get('phoneNumber')['controls'];
+                    let i = index
+                  "
+                >
+                  <div class="card-body py-1">
+                    <div class="d-flex justify-content-around">
+                      <div class="p-2 text-white w-100"  [formGroupName]="i" >
+                        <input
+                          type="number"
+                          formControlName="phone"
+                          class="form-control form-control-rounded"
+                          placeholder="{{ 'phone' | translate }}"
+                        />
+                         <div
+                        *ngIf="
+                          !form.get('restaurantAdmin').controls.phoneNumber.controls[i].get('phone').valid &&
+                          (form.get('restaurantAdmin').controls.phoneNumber.controls[i].get('phone').dirty || form.get('restaurantAdmin').controls.phoneNumber.controls[i].get('phone').touched)
+                        "
+                        class="text text-danger"
+                      >
+                        <p class="text-center mb-0 mt-1" *ngIf="form.get('restaurantAdmin').controls.phoneNumber.controls[i].get('phone').hasError('required')">
+                          {{ "required" | translate }}
+                        </p>
+                      </div> 
+                      </div>
+  
+                      <div class="p-1">
+                        <span
+                          title="{{ 'Delete' | translate }}"
+                          class="badge badge-pill badge-danger p-2 mr-1"
+                          (click)="deleteRestaurantAdminPhoneForm(i)"
+                        >
+                          <i
+                            title="{{ 'Delete' | translate }}"
+                            class="text-20 font-weight-bold i-Delete-File"
+                          ></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+            *ngIf="
+              !form.get('restaurantAdmin').get('phoneNumber').valid &&
+              (form.get('restaurantAdmin').get('phoneNumber').dirty || form.get('restaurantAdmin').get('phoneNumber').touched)
+            "
+            class="text text-danger"
+          >
+            <p class="text-center mb-0 mt-1" *ngIf="form.get('restaurantAdmin').get('phoneNumber').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+          </div>
+        </div> -->
       </div>
 
       <hr />
@@ -638,7 +634,7 @@
           </p>
           <div class="col-md-12 mx-auto border py-2 shadow" style="height: 50vh">
             <app-google-map
-              (marker)="setLocation($event)"
+              (marker)="setMarkerLocation($event)"
               [markerPositions]="locationList"
             ></app-google-map>
             <div

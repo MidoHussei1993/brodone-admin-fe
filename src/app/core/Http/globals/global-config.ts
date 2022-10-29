@@ -172,17 +172,6 @@ export class END_POINTS {
     delete: (id: number): string => brodoneUrl + "resources/" + id,
   };
 
-  public static attributeValues = {
-    add: (restaurantId: string, attributeId: any): string =>
-      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
-    getAll: (restaurantId: string, attributeId: any): string =>
-      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values`,
-    getById: (restaurantId: string, attributeId: any, id: any): string =>
-      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
-    update: (restaurantId: string, attributeId: any, id: any): string =>
-      `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
-  };
-
   public static variations = {
     add: (restaurantId: string, attributeId: any): string =>
       `${BaseURL}/restaurants/${restaurantId}/menu-items/${attributeId}/variations`,

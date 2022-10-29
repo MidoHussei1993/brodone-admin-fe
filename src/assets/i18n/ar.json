@@ -78,7 +78,7 @@
   "cityName": "المدينة",
   "firstName": "الاسم الاول",
   "lastName": "الاسم الاخير",
-  "password": "كلممة السر",
+  "password": "كلمة السر",
   "cityId": "المدينة",
   "message": "الرسائل",
   "catgories": "التصنيفات",
@@ -122,5 +122,8 @@
   "variations": "الاختلافات",
   "attribueValues": "قيم السمات",
   "value": "القيمة",
+  "attributes": "الصفات",
+  "titleAr": "العنوان بالعربية",
+  "descriptionAr": "الشرح بالعربية",
   "printer": "المطبعة"
 }

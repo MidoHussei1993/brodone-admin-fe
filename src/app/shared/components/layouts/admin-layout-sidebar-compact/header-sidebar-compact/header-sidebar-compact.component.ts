@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NavigationService } from "src/app/shared/services/navigation.service";
 import { SearchService } from "src/app/shared/services/search.service";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-header-sidebar-compact",
@@ -10,10 +11,12 @@ import { AuthService } from "src/app/shared/services/auth.service";
 })
 export class HeaderSidebarCompactComponent implements OnInit {
   notifications: any[];
+  currentLanguage = 'ar';
 
   constructor(
     private navService: NavigationService,
     public searchService: SearchService,
+    private translate: TranslateService,
     private auth: AuthService
   ) {
     this.notifications = [
@@ -63,7 +66,10 @@ export class HeaderSidebarCompactComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentLanguage = this.translate.currentLang;
+
+  }
 
   toggelSidebar() {
     const state = this.navService.sidebarState;
@@ -74,4 +80,22 @@ export class HeaderSidebarCompactComponent implements OnInit {
   signout() {
     this.auth.signout();
   }
+
+  changeLanguage(currentLang): void {
+    let el = document.documentElement;
+    this.translate.use(currentLang);
+    localStorage.setItem('lang',currentLang);
+    if(this.translate.currentLang == 'ar'){
+      // el.setAttribute('direction', 'rtl');
+      el.setAttribute('dir', 'rtl');
+      // el.style.direction = 'rtl';
+    }else{
+      // el.setAttribute('direction', 'ltr');
+      el.setAttribute('dir', 'ltr');
+      // el.style.direction = 'ltr';
+    }
+    this.currentLanguage = this.translate.currentLang;
+    location.reload()
+  }
+
 }

@@ -40,6 +40,7 @@
     "i": "^0.3.7",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.3",
+    "ng-multiselect-dropdown": "^1.0.0-beta.19",
     "ngx-chips": "2.1.0",
     "ngx-color-picker": "11.0.0",
     "ngx-custom-validators": "8.0.0",

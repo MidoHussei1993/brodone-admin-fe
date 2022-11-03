@@ -16,11 +16,13 @@ import { DemoNumberPipe } from './pipes';
 import { FilterComponent } from './components/filter/filter.component';
 import { GoogleMapComponent } from './components/google-map/google-map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FileInputComponent } from './components/file-input/file-input.component';
 
 const Component = [
   TableComponent,
   FilterComponent,
-  GoogleMapComponent
+  GoogleMapComponent,
+  FileInputComponent
 ]
 const Pipes = [
   DemoNumberPipe

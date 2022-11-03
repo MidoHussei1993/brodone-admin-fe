@@ -49,8 +49,8 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
         "",
         [Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)],
       ],
-      images: [["3"], [Validators.required]],
-      featuredImage: ["3", [Validators.required]],
+      images: new FormArray([], Validators.required),
+      featuredImage: ["", [Validators.required]],
       tagsId: this.formBuilder.array([], [Validators.required]),
       restaurantAdmin: this.formBuilder.group({
         // make a nested group
@@ -87,8 +87,8 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
         lat: ["", [Validators.required]],
         lng: ["", [Validators.required]],
         address: ["", [Validators.required]],
-        featuredImage: ["يييي", [Validators.required]],
-        images: [["ddd"], [Validators.required]],
+        featuredImage: ["", [Validators.required]],
+        images:new FormArray([], Validators.required),
         phoneNumbers: new FormArray([], [Validators.required]),
         countryCode: ["", [Validators.required]],
       }),
@@ -170,6 +170,7 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
 
   submit() {
     this.form.markAllAsTouched();
+    console.log(this.form.value);
     let selectedTags: any = this.tagList
       .filter((item) => item.selected)
       .map(({ id }) => id);
@@ -196,8 +197,10 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
   create() {
     let body = this.form.value;
     body.tagsId = body.tagsId.map(({value})=> value);
-    body.lat = +body.lat;
-    body.lng = +body.lng;
+    body.images = body.images.map(({ image }) => image);
+    body.branch.images = body.branch.images.map(({ image }) => image);
+    // body.lat = +body.lat;
+    // body.lng = +body.lng;
     body.branch.phoneNumbers = body.branch.phoneNumbers.map(({ phone }) => String(phone));
     this.spinner.show();
     this.mainService.create(body).subscribe(
@@ -218,8 +221,11 @@ export class RestaurantCrudComponent extends Crud implements OnInit {
     let body = this.form.value;
     console.log(body)
     body.tagsId = body.tagsId.map(({value})=> value)
-    body.lat = +body.lat;
-    body.lng = +body.lng;
+    body.images = body.images.map(({ image }) => image);
+    body.branch.images = body.branch.images.map(({ image }) => image);
+
+    // body.lat = +body.lat;
+    // body.lng = +body.lng;
     body.branch.phoneNumbers = body.branch.phoneNumbers.map(({ phone }) => String(phone));
     this.spinner.show();
     this.restaurantService.edit(this.route.snapshot.params.id, body).subscribe(

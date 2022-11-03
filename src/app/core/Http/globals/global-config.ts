@@ -196,4 +196,11 @@ export class END_POINTS {
       `${BaseURL}/restaurants/${restaurantId}/attributes/${attributeId}/attribute-values/${id}`,
   };
 
+  public static fileUpload = {
+    upload: BaseURL + "/file-upload",
+    delete: (fileKey: string): string =>
+      `${BaseURL}/file-upload/${fileKey}`,
+  };
+
+  
 }

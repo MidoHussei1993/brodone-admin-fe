@@ -102,20 +102,20 @@
                 prop != 'image' &&
                 prop != 'startAt' &&
                 prop != 'endAt' &&
-                prop != 'imageUrl' &&
+                prop != 'icon' &&
                 prop != 'basicImageForDesignUrl'
               "
             >
               {{ accessNestedPropertyOfObject(item, prop) }}
             </span>
             <img
-              [src]="item[prop]"
+              [src]="amazonLink + item[prop]"
               style="border-radius: 50%"
               width="50"
               height="50"
               *ngIf="
                 prop == 'imageUrl' ||
-                prop == 'basicImageForDesignUrl' ||
+                prop == 'icon' ||
                 prop == 'image'
               "
             />

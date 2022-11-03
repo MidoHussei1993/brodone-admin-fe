@@ -141,7 +141,7 @@
                 </div>
                 <div class="p-2">
                   <button
-                    (click)="addForm('phoneNumbers',this.initPhoneItem())"
+                    (click)="addForm('phoneNumbers', this.initPhoneItem())"
                     type="button"
                     class="btn btn-rounded btn-info px-4 mx-4 text-white d-inline-block"
                   >
@@ -160,7 +160,7 @@
               >
                 <div class="card-body py-1">
                   <div class="d-flex justify-content-around">
-                    <div class="p-2 text-white"  [formGroupName]="i" >
+                    <div class="p-2 text-white" [formGroupName]="i">
                       <input
                         type="number"
                         formControlName="phone"
@@ -168,23 +168,35 @@
                         placeholder="{{ 'phone' | translate }}"
                       />
                       <div
-                      *ngIf="
-                        !form.get('phoneNumbers').controls[i].get('phone').valid &&
-                        (form.get('phoneNumbers').controls[i].get('phone').dirty || form.get('phoneNumbers').controls[i].get('phone').touched)
-                      "
-                      class="text text-danger"
-                    >
-                      <p class="text-center mb-0 mt-1" *ngIf="form.get('phoneNumbers').controls[i].get('phone').hasError('required')">
-                        {{ "required" | translate }}
-                      </p>
-                    </div>
+                        *ngIf="
+                          !form.get('phoneNumbers').controls[i].get('phone')
+                            .valid &&
+                          (form.get('phoneNumbers').controls[i].get('phone')
+                            .dirty ||
+                            form.get('phoneNumbers').controls[i].get('phone')
+                              .touched)
+                        "
+                        class="text text-danger"
+                      >
+                        <p
+                          class="text-center mb-0 mt-1"
+                          *ngIf="
+                            form
+                              .get('phoneNumbers')
+                              .controls[i].get('phone')
+                              .hasError('required')
+                          "
+                        >
+                          {{ "required" | translate }}
+                        </p>
+                      </div>
                     </div>
 
                     <div class="p-1">
                       <span
                         title="{{ 'Delete' | translate }}"
                         class="badge badge-pill badge-danger p-2 mr-1"
-                        (click)="deleteForm('phoneNumbers',i)"
+                        (click)="deleteForm('phoneNumbers', i)"
                       >
                         <i
                           title="{{ 'Delete' | translate }}"
@@ -196,6 +208,50 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "featuredImage" | translate }} </label>
+          <app-file-input
+            [control]="form.controls.featuredImage"
+            [currentImage]="form.controls.featuredImage.value"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.get('featuredImage').valid &&
+              (form.get('featuredImage').dirty ||
+                form.get('featuredImage').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('featuredImage').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "images" | translate }} </label>
+          <app-file-input
+            [controlArray]="form.controls.images"
+            [multiple]="true"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.get('images').valid &&
+              (form.get('images').dirty ||
+                form.get('images').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('images').hasError('required')">
+              {{ "required" | translate }}
+            </p>
           </div>
         </div>
       </div>

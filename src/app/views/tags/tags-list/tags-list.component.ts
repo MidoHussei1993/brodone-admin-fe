@@ -30,24 +30,26 @@ export class TagsListComponent
     super(tagService, notifier, spinner, translate, route, router);
     this.titles = [
       "id",
-      "title",
-      "title",
-      "description",
-      "description",
+      "icon",
       "createdAt",
+      "title",
+      "title",
+      "description",
+      "description",
     ];
     this.properties = [
       "id",
+      "icon",
+      "createdAt",
       "title",
       "titleAr",
       "description",
       "descriptionAr",
-      "createdAt",
     ];
   }
 
   ngOnInit(): void {
-    this.navigateTo = "tables";
+    this.navigateTo = "tags";
     this.getList();
   }
 

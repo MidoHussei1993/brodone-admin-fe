@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { environment } from "src/environments/environment";
 import { Pagination } from "../../models";
 import { SwalModalService } from "../../services/swal-modal.service";
 // import { Pagination } from '../..';
@@ -64,6 +65,8 @@ export class TableComponent implements OnInit {
   @Output() export = new EventEmitter<number>();
 
   @Input() create: string = "";
+
+  amazonLink: string = environment.amazonLink;
 
   active: number = 1;
   form: FormGroup;

@@ -53,10 +53,11 @@ export class EmployeeBranchesCrudComponent extends Crud implements OnInit {
         [Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)],
       ],
       address: ["", [Validators.required]],
-      featuredImage: ["3", [Validators.required]],
-      lat: [22, [Validators.required]],
-      lng: [22, [Validators.required]],
+      featuredImage: ["", [Validators.required]],
+      lat: ['', [Validators.required]],
+      lng: ['', [Validators.required]],
       phoneNumbers: new FormArray([], Validators.required),
+      images: new FormArray([], Validators.required),
     });
     this.mode = this.route.snapshot.data.mode;
     this.currentLanguage = this.translate.currentLang;
@@ -91,6 +92,13 @@ export class EmployeeBranchesCrudComponent extends Crud implements OnInit {
               });
             }
           }
+          if (res.images) {
+            if (Array.isArray(res.images)) {
+              res.images.map((image) => {
+                this.addForm("images", this.initImageItem(image));
+              });
+            }
+          }
           this.locationList = [{
             lat: +res.lat,
             lng: +res.lng
@@ -103,9 +111,19 @@ export class EmployeeBranchesCrudComponent extends Crud implements OnInit {
       );
   }
 
+  initImageItem(val = "") {
+    const form = this.formBuilder.group({
+      image: [val, Validators.required],
+    });
+    return form;
+  }
+
   create() {
     let body = this.form.value;
     body.phoneNumbers = body.phoneNumbers.map(({ phone }) => String(phone));
+    body.images = body.images.map(({ image }) => image);
+    body.lat = +body.lat;
+    body.lng = +body.lng;
     this.spinner.show();
     this.employeeBranchesService
       .create(this.route.snapshot.params.restaurantId, body)
@@ -124,7 +142,11 @@ export class EmployeeBranchesCrudComponent extends Crud implements OnInit {
   }
   edit() {
     let body = this.form.value;
+    console.log("🚀 ~ file: employee-branches-crud.component.ts ~ line 129 ~ EmployeeBranchesCrudComponent ~ edit ~ body", body)
     body.phoneNumbers = body.phoneNumbers.map(({ phone }) => String(phone));
+    body.images = body.images.map(({ image }) => image);
+    body.lat = +body.lat;
+    body.lng = +body.lng;
     this.spinner.show();
     this.employeeBranchesService
       .edit(

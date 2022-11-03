@@ -97,6 +97,30 @@
             </div>
           </div>
 
+          <div class="row mt-3">
+            <div class="col-md-6 col-sm-12">
+              <label class="form-label">{{ "icon" | translate }} </label>
+              <app-file-input
+                [control]="form.controls.icon"
+                [currentImage]="form.controls.icon.value"
+              >
+              </app-file-input>
+              <div
+                *ngIf="
+                  !form.get('icon').valid &&
+                  (form.get('icon').dirty ||
+                    form.get('icon').touched)
+                "
+                class="text text-danger"
+              >
+                <p *ngIf="form.get('icon').hasError('required')">
+                  {{ "required" | translate }}
+                </p>
+              </div>
+            </div>
+    
+          </div>
+
           <div class="d-flex justify-content-center my-5">
         <div class="p-2" *ngIf="mode != 'View'">
           <button

@@ -105,6 +105,26 @@
         </div>
       </div>
 
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "image" | translate }} </label>
+          <app-file-input  [control]="form.controls.image" [currentImage]="form.controls.image.value">
+              </app-file-input>
+          <div
+            *ngIf="
+              !form.get('image').valid &&
+              (form.get('image').dirty ||
+                form.get('image').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('image').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex justify-content-center my-5">
         <div class="p-2" *ngIf="mode != 'View'">
           <button

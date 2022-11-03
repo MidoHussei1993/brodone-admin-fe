@@ -105,6 +105,50 @@
         </div>
       </div>
 
+      <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "featuredImage" | translate }} </label>
+          <app-file-input
+            [control]="form.controls.featuredImage"
+            [currentImage]="form.controls.featuredImage.value"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.get('featuredImage').valid &&
+              (form.get('featuredImage').dirty ||
+                form.get('featuredImage').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('featuredImage').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "images" | translate }} </label>
+          <app-file-input
+            [controlArray]="form.controls.images"
+            [multiple]="true"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.get('images').valid &&
+              (form.get('images').dirty ||
+                form.get('images').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.get('images').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
   
       <div class="row mt-3">
      
@@ -627,6 +671,51 @@
           </div>
           </div>
         </div>
+
+
+        <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "featuredImage" | translate }} </label>
+          <app-file-input
+            [control]="form.controls.branch.get('featuredImage')"
+            [currentImage]="form.controls.branch.get('featuredImage').value"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.controls.branch.get('featuredImage').valid &&
+              (form.controls.branch.get('featuredImage').dirty ||
+              form.controls.branch.get('featuredImage').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.controls.branch.get('featuredImage').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <label class="form-label">{{ "images" | translate }} </label>
+          <app-file-input
+            [controlArray]="form.controls.branch.get('images')"
+            [multiple]="true"
+          >
+          </app-file-input>
+          <div
+            *ngIf="
+              !form.controls.branch.get('images').valid &&
+              (form.controls.branch.get('images').dirty ||
+              form.controls.branch.get('images').touched)
+            "
+            class="text text-danger"
+          >
+            <p *ngIf="form.controls.branch.get('images').hasError('required')">
+              {{ "required" | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
 
         <div class="row mt-4">
           <p class="lead mx-2">

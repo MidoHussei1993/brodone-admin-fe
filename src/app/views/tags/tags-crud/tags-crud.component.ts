@@ -29,7 +29,7 @@ export class TagsCrudComponent extends Crud implements OnInit {
       titleAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
       description: ['', [ Validators.required,Validators.pattern(Pattern.OnlyEnglishLettersAndSpace)]],
       descriptionAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
-      icon: ["tes"],
+      icon: [""],
     });
     this.mode = this.route.snapshot.data.mode;
     this.currentLanguage = this.translate.currentLang;

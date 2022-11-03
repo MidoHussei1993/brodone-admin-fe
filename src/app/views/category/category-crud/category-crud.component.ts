@@ -29,7 +29,7 @@ export class CategoryCrudComponent extends Crud implements OnInit {
       nameAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
       description: ['', [ Validators.required,Validators.pattern(Pattern.OnlyEnglishLettersAndSpace)]],
       descriptionAr: ['', [ Validators.required, Validators.pattern(Pattern.OnlyArabicLetters)]],
-      image: ["tes"],
+      image: [],
       // parentId: [null],
       restaurantId: [+this.route.snapshot.params.restaurantId],
     });

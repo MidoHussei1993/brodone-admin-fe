@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiURL: 'https://api.winpro-sa.com/',
+  amazonLink:"https://brodone-test.s3.amazonaws.com/"
 
 };
 

@@ -55,7 +55,7 @@
   "avatar": "الصورة الرمزية",
   "avatar_name": "اسم الصورة الرمزية",
   "email": "البريد الالكتروني",
-  "productImage": "صورة المنتج",
+  "image": "الصوره",
   "Products": "المنتجات",
   "size": "الحجم",
   "color": "اللون",
@@ -123,6 +123,9 @@
   "attribueValues": "قيم السمات",
   "value": "القيمة",
   "attributes": "الصفات",
+  "images": "الصور",
+  "icon": "أيقونة",
+  "featuredImage": "صورة مميزة",
   "titleAr": "العنوان بالعربية",
   "descriptionAr": "الشرح بالعربية",
   "printer": "المطبعة"

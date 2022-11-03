@@ -55,7 +55,7 @@
   "avatar": "Avatar",
   "avatar_name": "Avatar Name",
   "_email": "Email",
-  "productImage": "Prouct Image",
+  "image": "Image",
   "Products": "Products",
   "size": "Size",
   "color": "Color",
@@ -122,6 +122,9 @@
   "variations": "Variations",
   "attribueValues": "attribue Values",
   "value": "Value",
+  "featuredImage": "Featured Image",
+  "images": "Images",
+  "icon": "Icon",
   "titleAr": "Arabic Title",
   "descriptionAr":"Arabic Description ",
   "printer": "printer"
